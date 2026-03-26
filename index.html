@@ -1,0 +1,567 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LP Engine — Bikin Landing Page Profesional dalam 3 Menit</title>
+    <meta name="description" content="AI landing page generator dengan tracking pixel baked-in. Bikin LP profesional dalam 3 menit, langsung siap iklan.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+        :root {
+            --void: #0a0a0f;
+            --deep: #12121a;
+            --grid: #1a1a2e;
+            --pink: #ff2d78;
+            --cyan: #00f0ff;
+            --purple: #b44dff;
+            --orange: #ff6b35;
+            --text: #f0e6d3;
+            --text-muted: #a89b8c;
+            --text-dim: #4a4458;
+            --heading: 'Space Grotesk', sans-serif;
+            --body: 'Inter', sans-serif;
+            --mono: 'JetBrains Mono', monospace;
+        }
+
+        body {
+            background: var(--void);
+            color: var(--text);
+            font-family: var(--body);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Scanlines */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(0,0,0,0.03) 2px, rgba(0,0,0,0.03) 4px);
+            pointer-events: none;
+            z-index: 9999;
+        }
+
+        /* Noise */
+        body::after {
+            content: '';
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            opacity: 0.04;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+            pointer-events: none;
+            z-index: 9998;
+        }
+
+        .container { max-width: 1000px; margin: 0 auto; padding: 0 24px; position: relative; z-index: 1; }
+
+        /* Grid background */
+        .grid-bg {
+            background-image:
+                linear-gradient(rgba(0,240,255,0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(0,240,255,0.03) 1px, transparent 1px);
+            background-size: 60px 60px;
+        }
+
+        /* Glow utilities */
+        .glow-pink { text-shadow: 0 0 20px rgba(255,45,120,0.5); }
+        .glow-cyan { text-shadow: 0 0 20px rgba(0,240,255,0.5); }
+        .glow-purple { text-shadow: 0 0 20px rgba(180,77,255,0.5); }
+
+        /* Nav */
+        nav {
+            display: flex; align-items: center; justify-content: space-between;
+            padding: 20px 0; border-bottom: 1px solid var(--grid);
+        }
+        .nav-logo { font-family: var(--heading); font-size: 20px; font-weight: 700; }
+        .nav-logo span { color: var(--pink); }
+        .nav-cta {
+            font-family: var(--mono); font-size: 12px; padding: 8px 20px;
+            background: var(--pink); color: #fff; border: none; border-radius: 6px;
+            text-decoration: none; font-weight: 500; letter-spacing: 0.05em;
+            text-transform: uppercase; box-shadow: 0 0 20px rgba(255,45,120,0.3);
+            transition: all 0.3s;
+        }
+        .nav-cta:hover { transform: scale(1.05); box-shadow: 0 0 30px rgba(255,45,120,0.5); }
+
+        /* Hero */
+        .hero {
+            padding: 100px 0 80px; text-align: center; position: relative;
+        }
+        .hero::before {
+            content: '';
+            position: absolute; top: 0; left: 50%; transform: translateX(-50%);
+            width: 800px; height: 600px;
+            background: radial-gradient(ellipse, rgba(255,45,120,0.08) 0%, rgba(180,77,255,0.04) 40%, transparent 70%);
+            pointer-events: none;
+        }
+        .hero-badge {
+            display: inline-block; font-family: var(--mono); font-size: 11px;
+            color: var(--cyan); border: 1px solid rgba(0,240,255,0.2);
+            padding: 6px 16px; border-radius: 999px; margin-bottom: 32px;
+            letter-spacing: 0.08em; text-transform: uppercase;
+        }
+        .hero h1 {
+            font-family: var(--heading); font-size: clamp(36px, 6vw, 56px);
+            font-weight: 700; line-height: 1.1; margin-bottom: 20px;
+            background: linear-gradient(135deg, var(--pink), var(--purple), var(--cyan));
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        .hero p {
+            font-size: 18px; color: var(--text-muted); max-width: 560px;
+            margin: 0 auto 36px; line-height: 1.7;
+        }
+        .hero-cta {
+            display: inline-block; font-family: var(--mono); font-size: 14px;
+            padding: 16px 40px; background: var(--pink); color: #fff;
+            border-radius: 8px; text-decoration: none; font-weight: 600;
+            letter-spacing: 0.05em; text-transform: uppercase;
+            box-shadow: 0 0 30px rgba(255,45,120,0.4), 0 0 60px rgba(255,45,120,0.1);
+            transition: all 0.3s;
+        }
+        .hero-cta:hover { transform: translateY(-2px); box-shadow: 0 0 40px rgba(255,45,120,0.6), 0 0 80px rgba(255,45,120,0.2); }
+        .hero-sub {
+            margin-top: 20px; font-family: var(--mono); font-size: 12px;
+            color: var(--text-dim);
+        }
+        .hero-sub span { color: var(--cyan); }
+
+        /* Ticker */
+        .ticker {
+            border-top: 1px solid var(--grid); border-bottom: 1px solid var(--grid);
+            padding: 14px 0; overflow: hidden; white-space: nowrap;
+        }
+        .ticker-inner {
+            display: inline-block; animation: scroll 20s linear infinite;
+            font-family: var(--mono); font-size: 13px; color: var(--text-dim);
+        }
+        .ticker-inner span { color: var(--cyan); margin: 0 32px; }
+        @keyframes scroll { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
+
+        /* Section */
+        .section { padding: 80px 0; }
+        .section-alt { background: var(--deep); }
+        .section-label {
+            font-family: var(--mono); font-size: 11px; color: var(--pink);
+            text-transform: uppercase; letter-spacing: 0.12em; margin-bottom: 12px;
+            text-align: center;
+        }
+        .section-title {
+            font-family: var(--heading); font-size: 32px; font-weight: 700;
+            text-align: center; margin-bottom: 48px; line-height: 1.2;
+        }
+
+        /* Speed demo */
+        .demo-frame {
+            background: var(--deep); border: 1px solid var(--grid); border-radius: 16px;
+            padding: 4px; max-width: 800px; margin: 0 auto;
+            box-shadow: 0 0 40px rgba(180,77,255,0.1);
+        }
+        .demo-frame-bar {
+            display: flex; align-items: center; gap: 6px; padding: 10px 16px;
+            border-bottom: 1px solid var(--grid);
+        }
+        .demo-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--grid); }
+        .demo-url { font-family: var(--mono); font-size: 11px; color: var(--text-dim); margin-left: 12px; }
+        .demo-content {
+            background: var(--void); border-radius: 0 0 12px 12px; min-height: 400px;
+            display: flex; align-items: center; justify-content: center;
+            font-family: var(--mono); font-size: 14px; color: var(--text-dim);
+        }
+
+        /* Problem cards */
+        .problem-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+        .problem-card {
+            background: var(--deep); border: 1px solid var(--grid); border-radius: 12px;
+            padding: 28px; text-align: center; transition: border-color 0.3s;
+        }
+        .problem-card:hover { border-color: var(--pink); }
+        .problem-icon { font-size: 32px; margin-bottom: 14px; }
+        .problem-card h3 { font-family: var(--heading); font-size: 16px; margin-bottom: 8px; }
+        .problem-card p { font-size: 14px; color: var(--text-muted); line-height: 1.5; }
+
+        /* Feature cards */
+        .feature-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+        .feature-card {
+            background: var(--deep); border-radius: 12px; padding: 28px;
+            border: 1px solid transparent;
+            background-image: linear-gradient(var(--deep), var(--deep)), linear-gradient(135deg, var(--grid), var(--grid));
+            background-origin: border-box; background-clip: padding-box, border-box;
+            transition: all 0.3s;
+        }
+        .feature-card:hover {
+            background-image: linear-gradient(var(--deep), var(--deep)), linear-gradient(135deg, var(--pink), var(--cyan));
+            box-shadow: 0 0 20px rgba(0,240,255,0.08);
+        }
+        .feature-icon { font-size: 28px; margin-bottom: 12px; }
+        .feature-card h3 { font-family: var(--heading); font-size: 15px; margin-bottom: 6px; }
+        .feature-card p { font-size: 13px; color: var(--text-muted); line-height: 1.5; }
+
+        /* Tracking highlight */
+        .tracking-highlight {
+            text-align: center; padding: 80px 0;
+            background: linear-gradient(180deg, var(--void) 0%, rgba(255,45,120,0.03) 50%, var(--void) 100%);
+        }
+        .tracking-highlight h2 {
+            font-family: var(--heading); font-size: 28px; margin-bottom: 16px;
+        }
+        .tracking-highlight h2 span { color: var(--cyan); }
+        .tracking-highlight p { font-size: 16px; color: var(--text-muted); max-width: 500px; margin: 0 auto 32px; }
+        .tracking-badges { display: flex; justify-content: center; gap: 16px; flex-wrap: wrap; }
+        .tracking-badge {
+            font-family: var(--mono); font-size: 12px; padding: 10px 20px;
+            border: 1px solid var(--grid); border-radius: 8px; color: var(--cyan);
+            background: var(--deep);
+        }
+
+        /* Comparison */
+        .compare-table { width: 100%; border-collapse: collapse; font-size: 14px; }
+        .compare-table th {
+            font-family: var(--mono); font-size: 11px; text-transform: uppercase;
+            letter-spacing: 0.08em; padding: 12px 16px; text-align: left;
+            color: var(--text-dim); border-bottom: 1px solid var(--grid);
+        }
+        .compare-table th:first-child { color: var(--text-muted); }
+        .compare-table th.ours { color: var(--pink); }
+        .compare-table td { padding: 14px 16px; border-bottom: 1px solid rgba(26,26,46,0.5); color: var(--text-muted); }
+        .compare-table td:last-child { color: var(--cyan); font-weight: 500; }
+        .compare-table tr:hover td { background: rgba(0,240,255,0.02); }
+
+        /* Personas */
+        .persona-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+        .persona-card {
+            background: var(--deep); border: 1px solid var(--grid); border-radius: 12px;
+            padding: 28px; text-align: center; transition: border-color 0.3s;
+        }
+        .persona-card:hover { border-color: var(--purple); }
+        .persona-emoji { font-size: 36px; margin-bottom: 12px; }
+        .persona-card h3 { font-family: var(--heading); font-size: 15px; margin-bottom: 6px; }
+        .persona-card p { font-size: 13px; color: var(--text-muted); line-height: 1.5; }
+
+        /* Pricing */
+        .pricing-card {
+            max-width: 480px; margin: 0 auto; background: var(--deep);
+            border-radius: 16px; padding: 40px; text-align: center;
+            border: 1px solid transparent;
+            background-image: linear-gradient(var(--deep), var(--deep)), linear-gradient(135deg, var(--pink), var(--purple), var(--cyan));
+            background-origin: border-box; background-clip: padding-box, border-box;
+            box-shadow: 0 0 40px rgba(255,45,120,0.1);
+        }
+        .pricing-old { font-family: var(--mono); font-size: 14px; color: var(--text-dim); text-decoration: line-through; margin-bottom: 4px; }
+        .pricing-amount {
+            font-family: var(--heading); font-size: 48px; font-weight: 700;
+            background: linear-gradient(135deg, var(--pink), var(--orange));
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+            margin-bottom: 4px;
+        }
+        .pricing-period { font-family: var(--mono); font-size: 12px; color: var(--text-dim); margin-bottom: 24px; }
+        .pricing-features { list-style: none; text-align: left; margin-bottom: 28px; }
+        .pricing-features li { padding: 8px 0; font-size: 14px; color: var(--text-muted); border-bottom: 1px solid rgba(26,26,46,0.5); }
+        .pricing-features li::before { content: '✓ '; color: var(--cyan); font-weight: 600; }
+        .pricing-cta {
+            display: block; width: 100%; font-family: var(--mono); font-size: 14px;
+            padding: 16px; background: var(--pink); color: #fff; border: none;
+            border-radius: 8px; font-weight: 600; text-transform: uppercase;
+            letter-spacing: 0.05em; cursor: pointer; text-decoration: none; text-align: center;
+            box-shadow: 0 0 30px rgba(255,45,120,0.4);
+            transition: all 0.3s;
+        }
+        .pricing-cta:hover { transform: scale(1.03); box-shadow: 0 0 40px rgba(255,45,120,0.6); }
+        .pricing-trust {
+            display: flex; justify-content: center; gap: 20px; margin-top: 20px;
+            font-family: var(--mono); font-size: 11px; color: var(--text-dim);
+        }
+
+        /* Offer stack */
+        .offer-item {
+            display: flex; align-items: center; gap: 12px; padding: 14px 0;
+            border-bottom: 1px solid rgba(26,26,46,0.5);
+        }
+        .offer-item .check { color: var(--cyan); font-size: 16px; }
+        .offer-item .name { flex: 1; font-size: 14px; }
+        .offer-item .value { font-family: var(--mono); font-size: 12px; color: var(--text-dim); text-decoration: line-through; }
+        .offer-total {
+            text-align: center; padding: 20px 0; margin-top: 8px;
+        }
+        .offer-total-old { font-family: var(--mono); font-size: 14px; color: var(--text-dim); text-decoration: line-through; }
+
+        /* FAQ */
+        .faq-item { border-bottom: 1px solid var(--grid); }
+        .faq-item summary {
+            padding: 18px 0; font-family: var(--heading); font-size: 15px;
+            cursor: pointer; list-style: none; display: flex; justify-content: space-between;
+            color: var(--text); transition: color 0.2s;
+        }
+        .faq-item summary:hover { color: var(--cyan); }
+        .faq-item summary::after { content: '+'; color: var(--pink); font-size: 18px; }
+        .faq-item[open] summary::after { content: '−'; }
+        .faq-item p { padding: 0 0 18px; font-size: 14px; color: var(--text-muted); line-height: 1.6; }
+
+        /* Footer */
+        .footer {
+            border-top: 1px solid var(--grid); padding: 40px 0; text-align: center;
+        }
+        .footer-links { display: flex; justify-content: center; gap: 24px; margin-bottom: 16px; }
+        .footer-links a { font-family: var(--mono); font-size: 13px; color: var(--text-dim); text-decoration: none; transition: color 0.2s; }
+        .footer-links a:hover { color: var(--cyan); }
+        .footer-copy { font-family: var(--mono); font-size: 12px; color: var(--text-dim); }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .problem-grid, .feature-grid, .persona-grid { grid-template-columns: 1fr; }
+            .hero { padding: 60px 0 40px; }
+            .section { padding: 48px 0; }
+            .tracking-badges { flex-direction: column; align-items: center; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <nav>
+            <div class="nav-logo">LP<span>Engine</span></div>
+            <a href="#pricing" class="nav-cta">Mulai Sekarang</a>
+        </nav>
+    </div>
+
+    <!-- Hero -->
+    <section class="hero grid-bg">
+        <div class="container">
+            <div class="hero-badge">AI Landing Page Generator</div>
+            <h1>Bikin Landing Page Profesional dalam 3 Menit</h1>
+            <p>Isi form singkat, AI generate LP lengkap — copywriting, desain, tracking pixel. Langsung siap iklan.</p>
+            <a href="#pricing" class="hero-cta">Coba Sekarang — Rp 99.000</a>
+            <div class="hero-sub">
+                <span>⚡</span> Sekali bayar, lifetime · <span>🔑</span> Bring Your Own AI Key · <span>📊</span> Pixel langsung masuk
+            </div>
+        </div>
+    </section>
+
+    <!-- Ticker -->
+    <div class="ticker">
+        <div class="ticker-inner">
+            <span>🔥 500+ LP dibuat</span> · <span>⚡ 3 menit generate</span> · <span>📊 Meta Pixel baked-in</span> · <span>🤖 Claude + GPT + Gemini</span> · <span>💰 Rp 99K sekali bayar</span> · <span>🇮🇩 Buatan Indonesia</span> ·
+            <span>🔥 500+ LP dibuat</span> · <span>⚡ 3 menit generate</span> · <span>📊 Meta Pixel baked-in</span> · <span>🤖 Claude + GPT + Gemini</span> · <span>💰 Rp 99K sekali bayar</span> · <span>🇮🇩 Buatan Indonesia</span> ·
+        </div>
+    </div>
+
+    <!-- Speed Demo -->
+    <section class="section">
+        <div class="container">
+            <div class="section-label">Lihat Cara Kerjanya</div>
+            <div class="section-title">Form → AI → Landing Page. Done.</div>
+            <div class="demo-frame">
+                <div class="demo-frame-bar">
+                    <div class="demo-dot"></div><div class="demo-dot"></div><div class="demo-dot"></div>
+                    <span class="demo-url">lp.weedlabs.online/generator</span>
+                </div>
+                <div class="demo-content">
+                    [ Speed demo video / GIF here ]
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Problem -->
+    <section class="section section-alt">
+        <div class="container">
+            <div class="section-label">Masalahnya</div>
+            <div class="section-title">Bikin LP Itu Ribet. Sampai Sekarang.</div>
+            <div class="problem-grid">
+                <div class="problem-card">
+                    <div class="problem-icon">😩</div>
+                    <h3>Bikin Sendiri? 3 Hari.</h3>
+                    <p>Buka Canva, coba HTML, copy-paste dari sana-sini. Hasilnya? Masih jelek.</p>
+                </div>
+                <div class="problem-card">
+                    <div class="problem-icon">💸</div>
+                    <h3>Hire Desainer? Rp 3-10 Juta.</h3>
+                    <p>Buat satu halaman. Mau revisi? Tambah biaya. Mau halaman baru? Mulai dari nol.</p>
+                </div>
+                <div class="problem-card">
+                    <div class="problem-icon">😵</div>
+                    <h3>Tool Lain? Output Generic.</h3>
+                    <p>Generate LP, done. Tapi ga bisa edit. Ga ada pixel tracking. Harus pasang sendiri.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features -->
+    <section class="section">
+        <div class="container">
+            <div class="section-label">Fitur</div>
+            <div class="section-title">Semua Yang Kamu Butuhkan. Satu Tool.</div>
+            <div class="feature-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">🤖</div>
+                    <h3>Multi-AI Engine</h3>
+                    <p>Pilih Claude, ChatGPT, atau Gemini. Bring your own API key — kamu yang kontrol.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">✏️</div>
+                    <h3>Edit Langsung di Preview</h3>
+                    <p>Klik teks, ubah. Klik tombol, ganti. Ga perlu buka code editor.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">📊</div>
+                    <h3>Tracking Pixel Baked-in</h3>
+                    <p>Meta Pixel, TikTok, Google Tag — langsung ter-inject di HTML. Pilih event per tombol.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🎨</div>
+                    <h3>6 Template Profesional</h3>
+                    <p>Product Launch, Sales Page, App, Lead Magnet, Course, Link in Bio.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">✨</div>
+                    <h3>AI Rewrite Per Elemen</h3>
+                    <p>Klik headline, ketik "bikin lebih urgent". AI tulis ulang cuma bagian itu.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">📱</div>
+                    <h3>Responsive by Default</h3>
+                    <p>Semua LP yang di-generate otomatis responsive. Desktop, tablet, HP.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Tracking Highlight -->
+    <section class="tracking-highlight">
+        <div class="container">
+            <div class="section-label">Diferensiator #1</div>
+            <h2>Tool lain bikin LP. <span>LP Engine pasangin pixel-nya.</span></h2>
+            <p>Kamu habis Rp 500K/hari buat Meta Ads tapi LP-mu ga ada pixel? Data hilang. Konversi ga ke-track. LP Engine solve ini dari awal.</p>
+            <div class="tracking-badges">
+                <div class="tracking-badge">Meta Pixel ✓</div>
+                <div class="tracking-badge">TikTok Pixel ✓</div>
+                <div class="tracking-badge">Google Tag ✓</div>
+                <div class="tracking-badge">Event per CTA ✓</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Comparison -->
+    <section class="section section-alt">
+        <div class="container">
+            <div class="section-label">Perbandingan</div>
+            <div class="section-title">LP Engine vs Alternatif</div>
+            <table class="compare-table">
+                <tr>
+                    <th></th>
+                    <th>Bikin Sendiri</th>
+                    <th>Jasa Desain</th>
+                    <th>sesuaiformat</th>
+                    <th class="ours">LP Engine</th>
+                </tr>
+                <tr><td>Harga</td><td>Gratis (+ waktu)</td><td>Rp 3-10 Juta</td><td>Rp 145.000</td><td>Rp 99.000</td></tr>
+                <tr><td>Waktu</td><td>3-7 hari</td><td>1-2 minggu</td><td>5 menit</td><td>3 menit</td></tr>
+                <tr><td>Edit di Preview</td><td>❌</td><td>❌ (revisi manual)</td><td>❌</td><td>✓</td></tr>
+                <tr><td>Tracking Pixel</td><td>Pasang sendiri</td><td>Minta desainer</td><td>❌</td><td>✓ Otomatis</td></tr>
+                <tr><td>AI Rewrite</td><td>❌</td><td>❌</td><td>Regenerate semua</td><td>✓ Per elemen</td></tr>
+                <tr><td>Multi-AI</td><td>❌</td><td>❌</td><td>1 provider</td><td>✓ 3 provider</td></tr>
+                <tr><td>Drag & Drop</td><td>❌</td><td>❌</td><td>❌</td><td>✓</td></tr>
+            </table>
+        </div>
+    </section>
+
+    <!-- Personas -->
+    <section class="section">
+        <div class="container">
+            <div class="section-label">Cocok Buat</div>
+            <div class="section-title">Siapa Yang Butuh LP Engine?</div>
+            <div class="persona-grid">
+                <div class="persona-card">
+                    <div class="persona-emoji">👩‍💻</div>
+                    <h3>Digital Product Seller</h3>
+                    <p>Jualan ebook, template, course di Scalev. Butuh LP yang convert tapi ga mau bayar jasa desain tiap produk baru.</p>
+                </div>
+                <div class="persona-card">
+                    <div class="persona-emoji">🏪</div>
+                    <h3>Pemilik UMKM</h3>
+                    <p>Jualan skincare, fashion, F&B online. Sudah ngiklan tapi LP-nya masih seadanya. Perlu upgrade tanpa ribet.</p>
+                </div>
+                <div class="persona-card">
+                    <div class="persona-emoji">🎨</div>
+                    <h3>Freelance Designer</h3>
+                    <p>Handle 10+ klien. Butuh speed. Generate LP dalam menit, polish, deliver. 10x lebih cepat dari manual.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pricing -->
+    <section class="section section-alt" id="pricing">
+        <div class="container">
+            <div class="section-label">Harga</div>
+            <div class="section-title">Satu Harga. Selamanya.</div>
+
+            <!-- Offer Stack -->
+            <div style="max-width: 480px; margin: 0 auto 32px;">
+                <div class="offer-item"><span class="check">✓</span><span class="name">LP Engine — Lifetime Access</span><span class="value">Rp 500.000</span></div>
+                <div class="offer-item"><span class="check">✓</span><span class="name">6 Template Profesional</span><span class="value">Rp 300.000</span></div>
+                <div class="offer-item"><span class="check">✓</span><span class="name">Tracking Pixel Integration</span><span class="value">Rp 200.000</span></div>
+                <div class="offer-item"><span class="check">✓</span><span class="name">AI Rewrite & Inline Edit</span><span class="value">Rp 200.000</span></div>
+                <div class="offer-item"><span class="check">✓</span><span class="name">Image Upload & Block Editor</span><span class="value">Rp 100.000</span></div>
+                <div class="offer-total">
+                    <div class="offer-total-old">Total Nilai: Rp 1.300.000</div>
+                </div>
+            </div>
+
+            <div class="pricing-card">
+                <div class="pricing-old">Rp 1.300.000</div>
+                <div class="pricing-amount">Rp 99.000</div>
+                <div class="pricing-period">Sekali bayar · Lifetime · BYOK</div>
+                <ul class="pricing-features">
+                    <li>Generate unlimited landing pages</li>
+                    <li>12 section LP structure (proven converting)</li>
+                    <li>Meta, TikTok, Google pixel injection</li>
+                    <li>Claude, ChatGPT, Gemini support</li>
+                    <li>Inline editing + AI rewrite</li>
+                    <li>Drag-and-drop sections & blocks</li>
+                    <li>Image upload</li>
+                    <li>HTML export — deploy anywhere</li>
+                </ul>
+                <a href="#" class="pricing-cta">Mulai Bikin LP Sekarang</a>
+                <div class="pricing-trust">
+                    <span>🔒 Pembayaran Aman</span>
+                    <span>⚡ Akses Instant</span>
+                    <span>🔑 BYOK</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ -->
+    <section class="section">
+        <div class="container">
+            <div class="section-label">FAQ</div>
+            <div class="section-title">Pertanyaan Yang Sering Ditanya</div>
+            <div style="max-width: 640px; margin: 0 auto;">
+                <details class="faq-item"><summary>Butuh coding ga? <span></span></summary><p>Engga sama sekali. Tinggal isi form, pilih template, klik Generate. LP langsung jadi. Mau edit? Klik langsung di preview.</p></details>
+                <details class="faq-item"><summary>AI-nya pake apa? <span></span></summary><p>Kamu pilih sendiri: Claude (Anthropic), ChatGPT (OpenAI), atau Gemini (Google). Bring Your Own Key — kamu yang kontrol biaya dan quality.</p></details>
+                <details class="faq-item"><summary>Bisa dipake di Scalev? <span></span></summary><p>Bisa. LP Engine output clean HTML yang compatible dengan Scalev, Lynk.id, WordPress, Shopify, atau deploy sendiri di hosting manapun.</p></details>
+                <details class="faq-item"><summary>Pixel tracking itu apa? <span></span></summary><p>Kode kecil yang nge-track siapa yang visit, klik, dan beli di LP kamu. Penting banget kalau kamu jalanin iklan Meta/TikTok. LP Engine inject pixel-nya otomatis ke HTML — kamu tinggal masukkan ID.</p></details>
+                <details class="faq-item"><summary>Bedanya sama sesuaiformat? <span></span></summary><p>sesuaiformat generate LP, done. LP Engine generate LP + bisa edit langsung di preview + tracking pixel langsung baked-in + support 3 AI provider + drag-and-drop. Dan lebih murah (Rp 99K vs Rp 145K).</p></details>
+                <details class="faq-item"><summary>Kalau ga cocok gimana? <span></span></summary><p>Garansi 7 hari uang kembali. No questions asked.</p></details>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer grid-bg">
+        <div class="container">
+            <div class="footer-links">
+                <a href="https://weedlabs.online">weedlabs.online</a>
+                <a href="https://instagram.com/buildwithdeee">@buildwithdeee</a>
+                <a href="mailto:hi@weedlabs.online">Contact</a>
+            </div>
+            <p class="footer-copy">© 2026 Weed Labs · LP Engine · Bangga Buatan Indonesia 🇮🇩</p>
+        </div>
+    </footer>
+</body>
+</html>
