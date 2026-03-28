@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Pageon — Bikin Landing Page Profesional dalam 3 Menit</title>
     <meta name="description" content="AI landing page generator dengan tracking pixel baked-in. Bikin LP profesional dalam 3 menit, langsung siap iklan.">
+    <link rel="icon" type="image/png" href="assets/favicon.png">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
@@ -71,12 +72,27 @@
         .glow-cyan { text-shadow: 0 0 20px rgba(0,240,255,0.5); }
         .glow-purple { text-shadow: 0 0 20px rgba(180,77,255,0.5); }
 
+        /* Scroll fade-in */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(24px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
         /* Nav */
         nav {
             display: flex; align-items: center; justify-content: space-between;
             padding: 20px 0; border-bottom: 1px solid var(--grid);
         }
-        .nav-logo { font-family: var(--heading); font-size: 20px; font-weight: 700; }
+        .nav-logo {
+            font-family: var(--heading); font-size: 20px; font-weight: 700;
+            display: flex; align-items: center; gap: 8px;
+        }
+        .nav-logo img { width: 32px; height: 32px; border-radius: 8px; }
         .nav-logo span { color: var(--cyan); }
         .nav-cta {
             font-family: var(--mono); font-size: 12px; padding: 8px 20px;
@@ -89,31 +105,51 @@
 
         /* Hero */
         .hero {
-            padding: 100px 0 80px; text-align: center; position: relative;
+            padding: 80px 0 60px; position: relative;
+            background-image: url('assets/brand/bg-grid-perspective.png');
+            background-size: cover;
+            background-position: center bottom;
+            background-blend-mode: overlay;
         }
         .hero::before {
             content: '';
-            position: absolute; top: 0; left: 50%; transform: translateX(-50%);
-            width: 800px; height: 600px;
-            background: radial-gradient(ellipse, rgba(180,77,255,0.08) 0%, rgba(0,240,255,0.04) 40%, transparent 70%);
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            background: linear-gradient(180deg, rgba(10,10,15,0.7) 0%, rgba(10,10,15,0.85) 60%, var(--void) 100%);
             pointer-events: none;
+        }
+        .hero-inner {
+            display: flex; align-items: center; gap: 48px;
+            position: relative; z-index: 1;
+        }
+        .hero-text { flex: 1; }
+        .hero-mascot {
+            flex-shrink: 0;
+        }
+        .hero-mascot img {
+            max-width: 340px; width: 100%; height: auto;
+            filter: drop-shadow(0 0 40px rgba(255,45,120,0.3));
+            animation: float 4s ease-in-out infinite;
+        }
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-12px); }
         }
         .hero-badge {
             display: inline-block; font-family: var(--mono); font-size: 11px;
             color: var(--cyan); border: 1px solid rgba(0,240,255,0.2);
-            padding: 6px 16px; border-radius: 999px; margin-bottom: 32px;
+            padding: 6px 16px; border-radius: 999px; margin-bottom: 24px;
             letter-spacing: 0.08em; text-transform: uppercase;
         }
         .hero h1 {
-            font-family: var(--heading); font-size: clamp(36px, 6vw, 56px);
-            font-weight: 700; line-height: 1.1; margin-bottom: 20px;
+            font-family: var(--heading); font-size: clamp(32px, 5vw, 48px);
+            font-weight: 700; line-height: 1.15; margin-bottom: 18px;
             background: linear-gradient(135deg, var(--cyan), var(--purple), var(--cyan));
             -webkit-background-clip: text; -webkit-text-fill-color: transparent;
             background-clip: text;
         }
         .hero p {
-            font-size: 18px; color: var(--text-muted); max-width: 560px;
-            margin: 0 auto 36px; line-height: 1.7;
+            font-size: 17px; color: var(--text-muted); max-width: 480px;
+            margin-bottom: 28px; line-height: 1.7;
         }
         .hero-cta {
             display: inline-block; font-family: var(--mono); font-size: 14px;
@@ -125,7 +161,7 @@
         }
         .hero-cta:hover { transform: translateY(-2px); box-shadow: 0 0 40px rgba(180,77,255,0.6), 0 0 80px rgba(0,240,255,0.2); }
         .hero-sub {
-            margin-top: 20px; font-family: var(--mono); font-size: 12px;
+            margin-top: 16px; font-family: var(--mono); font-size: 12px;
             color: var(--text-dim);
         }
         .hero-sub span { color: var(--cyan); }
@@ -156,9 +192,18 @@
         }
 
         /* Speed demo */
+        .demo-wrapper {
+            display: flex; align-items: center; gap: 32px; max-width: 800px; margin: 0 auto;
+        }
+        .demo-mascot { flex-shrink: 0; }
+        .demo-mascot img {
+            width: 180px; height: auto;
+            filter: drop-shadow(0 0 20px rgba(255,45,120,0.2));
+        }
         .demo-frame {
+            flex: 1;
             background: var(--deep); border: 1px solid var(--grid); border-radius: 16px;
-            padding: 4px; max-width: 800px; margin: 0 auto;
+            padding: 4px;
             box-shadow: 0 0 40px rgba(180,77,255,0.1);
         }
         .demo-frame-bar {
@@ -168,12 +213,28 @@
         .demo-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--grid); }
         .demo-url { font-family: var(--mono); font-size: 11px; color: var(--text-dim); margin-left: 12px; }
         .demo-content {
-            background: var(--void); border-radius: 0 0 12px 12px; min-height: 400px;
-            display: flex; align-items: center; justify-content: center;
-            font-family: var(--mono); font-size: 14px; color: var(--text-dim);
+            background: var(--void); border-radius: 0 0 12px 12px;
+            padding: 24px; display: flex; flex-direction: column; align-items: center; justify-content: center;
+            min-height: 280px;
         }
+        .demo-content img {
+            max-width: 200px; margin-bottom: 16px;
+            filter: drop-shadow(0 0 16px rgba(0,240,255,0.2));
+        }
+        .demo-caption {
+            font-family: var(--mono); font-size: 13px; color: var(--text-dim);
+            text-align: center;
+        }
+        .demo-caption span { color: var(--pink); }
 
         /* Problem cards */
+        .problem-visual {
+            text-align: center; margin-bottom: 40px;
+        }
+        .problem-visual img {
+            max-width: 480px; width: 100%; border-radius: 16px;
+            filter: drop-shadow(0 0 30px rgba(255,45,120,0.15));
+        }
         .problem-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
         .problem-card {
             background: var(--deep); border: 1px solid var(--grid); border-radius: 12px;
@@ -197,25 +258,49 @@
             background-image: linear-gradient(var(--deep), var(--deep)), linear-gradient(135deg, var(--purple), var(--cyan));
             box-shadow: 0 0 20px rgba(0,240,255,0.08);
         }
-        .feature-icon { font-size: 28px; margin-bottom: 12px; }
+        .feature-icon-img {
+            width: 48px; height: 48px; margin-bottom: 14px;
+            filter: drop-shadow(0 0 8px rgba(0,240,255,0.3));
+            object-fit: contain;
+        }
         .feature-card h3 { font-family: var(--heading); font-size: 15px; margin-bottom: 6px; }
         .feature-card p { font-size: 13px; color: var(--text-muted); line-height: 1.5; }
 
         /* Tracking highlight */
         .tracking-highlight {
-            text-align: center; padding: 80px 0;
+            padding: 80px 0;
             background: linear-gradient(180deg, var(--void) 0%, rgba(180,77,255,0.03) 50%, var(--void) 100%);
+        }
+        .tracking-inner {
+            text-align: center;
+        }
+        .tracking-mascot {
+            margin: 0 auto 32px;
+        }
+        .tracking-mascot img {
+            max-width: 320px; width: 100%; height: auto;
+            filter: drop-shadow(0 0 40px rgba(0,240,255,0.2));
         }
         .tracking-highlight h2 {
             font-family: var(--heading); font-size: 28px; margin-bottom: 16px;
         }
         .tracking-highlight h2 span { color: var(--cyan); }
-        .tracking-highlight p { font-size: 16px; color: var(--text-muted); max-width: 500px; margin: 0 auto 32px; }
+        .tracking-highlight > .container > p,
+        .tracking-inner > p {
+            font-size: 16px; color: var(--text-muted); max-width: 500px; margin: 0 auto 32px;
+        }
         .tracking-badges { display: flex; justify-content: center; gap: 16px; flex-wrap: wrap; }
         .tracking-badge {
-            font-family: var(--mono); font-size: 12px; padding: 10px 20px;
+            font-family: var(--mono); font-size: 12px; padding: 12px 20px;
             border: 1px solid var(--grid); border-radius: 8px; color: var(--cyan);
             background: var(--deep);
+            display: flex; align-items: center; gap: 10px;
+            transition: border-color 0.3s;
+        }
+        .tracking-badge:hover { border-color: var(--cyan); }
+        .tracking-badge img {
+            width: 28px; height: 28px; object-fit: contain;
+            filter: drop-shadow(0 0 6px rgba(0,240,255,0.4));
         }
 
         /* Comparison */
@@ -238,11 +323,29 @@
             padding: 28px; text-align: center; transition: border-color 0.3s;
         }
         .persona-card:hover { border-color: var(--cyan); }
-        .persona-emoji { font-size: 36px; margin-bottom: 12px; }
+        .persona-avatar {
+            width: 72px; height: 72px; border-radius: 50%; margin: 0 auto 14px;
+            object-fit: cover;
+            border: 2px solid var(--grid);
+            filter: drop-shadow(0 0 8px rgba(255,45,120,0.2));
+        }
         .persona-card h3 { font-family: var(--heading); font-size: 15px; margin-bottom: 6px; }
         .persona-card p { font-size: 13px; color: var(--text-muted); line-height: 1.5; }
 
         /* Pricing */
+        .pricing-wrapper {
+            position: relative;
+        }
+        .pricing-mascot {
+            position: absolute;
+            right: -60px; top: -40px;
+            z-index: 2;
+        }
+        .pricing-mascot img {
+            width: 120px; height: auto;
+            filter: drop-shadow(0 0 20px rgba(255,45,120,0.3));
+            animation: float 3s ease-in-out infinite;
+        }
         .pricing-card {
             max-width: 480px; margin: 0 auto; background: var(--deep);
             border-radius: 16px; padding: 40px; text-align: center;
@@ -250,8 +353,13 @@
             background-image: linear-gradient(var(--deep), var(--deep)), linear-gradient(135deg, var(--cyan), var(--purple), var(--cyan));
             background-origin: border-box; background-clip: padding-box, border-box;
             box-shadow: 0 0 40px rgba(255,45,120,0.1);
+            position: relative;
         }
-        .pricing-old { font-family: var(--mono); font-size: 14px; color: var(--text-dim); text-decoration: line-through; margin-bottom: 4px; }
+        .pricing-old {
+            font-family: var(--mono); font-size: 16px; color: var(--text-dim);
+            text-decoration: line-through; margin-bottom: 4px;
+            text-shadow: 0 0 10px rgba(255,107,53,0.4);
+        }
         .pricing-amount {
             font-family: var(--heading); font-size: 48px; font-weight: 700;
             background: linear-gradient(135deg, var(--cyan), var(--purple));
@@ -261,7 +369,7 @@
         .pricing-period { font-family: var(--mono); font-size: 12px; color: var(--text-dim); margin-bottom: 24px; }
         .pricing-features { list-style: none; text-align: left; margin-bottom: 28px; }
         .pricing-features li { padding: 8px 0; font-size: 14px; color: var(--text-muted); border-bottom: 1px solid rgba(26,26,46,0.5); }
-        .pricing-features li::before { content: '✓ '; color: var(--cyan); font-weight: 600; }
+        .pricing-features li::before { content: '\2713 '; color: var(--cyan); font-weight: 600; }
         .pricing-cta {
             display: block; width: 100%; font-family: var(--mono); font-size: 14px;
             padding: 16px; background: linear-gradient(135deg, var(--purple), var(--cyan)); color: #fff; border: none;
@@ -275,6 +383,11 @@
             display: flex; justify-content: center; gap: 20px; margin-top: 20px;
             font-family: var(--mono); font-size: 11px; color: var(--text-dim);
         }
+        .pricing-urgency {
+            font-family: var(--mono); font-size: 12px; color: var(--orange);
+            margin-top: 16px; text-align: center;
+            text-shadow: 0 0 10px rgba(255,107,53,0.3);
+        }
 
         /* Offer stack */
         .offer-item {
@@ -287,7 +400,11 @@
         .offer-total {
             text-align: center; padding: 20px 0; margin-top: 8px;
         }
-        .offer-total-old { font-family: var(--mono); font-size: 14px; color: var(--text-dim); text-decoration: line-through; }
+        .offer-total-old {
+            font-family: var(--mono); font-size: 16px; color: var(--text-dim);
+            text-decoration: line-through;
+            text-shadow: 0 0 10px rgba(255,107,53,0.3);
+        }
 
         /* FAQ */
         .faq-item { border-bottom: 1px solid var(--grid); }
@@ -298,44 +415,90 @@
         }
         .faq-item summary:hover { color: var(--cyan); }
         .faq-item summary::after { content: '+'; color: var(--cyan); font-size: 18px; }
-        .faq-item[open] summary::after { content: '−'; }
+        .faq-item[open] summary::after { content: '\2212'; }
         .faq-item p { padding: 0 0 18px; font-size: 14px; color: var(--text-muted); line-height: 1.6; }
 
         /* Footer */
         .footer {
             border-top: 1px solid var(--grid); padding: 40px 0; text-align: center;
         }
+        .footer-mascot {
+            margin-bottom: 16px;
+        }
+        .footer-mascot img {
+            width: 48px; height: auto;
+            filter: drop-shadow(0 0 10px rgba(255,45,120,0.3));
+        }
         .footer-links { display: flex; justify-content: center; gap: 24px; margin-bottom: 16px; }
         .footer-links a { font-family: var(--mono); font-size: 13px; color: var(--text-dim); text-decoration: none; transition: color 0.2s; }
         .footer-links a:hover { color: var(--cyan); }
         .footer-copy { font-family: var(--mono); font-size: 12px; color: var(--text-dim); }
 
+        /* Sticky mobile CTA */
+        .sticky-cta {
+            display: none;
+            position: fixed; bottom: 0; left: 0; right: 0;
+            background: rgba(10,10,15,0.95);
+            backdrop-filter: blur(10px);
+            border-top: 1px solid var(--grid);
+            padding: 12px 24px;
+            z-index: 9000;
+        }
+        .sticky-cta a {
+            display: block; width: 100%; font-family: var(--mono); font-size: 13px;
+            padding: 14px; background: linear-gradient(135deg, var(--purple), var(--cyan)); color: #fff;
+            border-radius: 8px; font-weight: 600; text-transform: uppercase;
+            letter-spacing: 0.05em; text-decoration: none; text-align: center;
+            box-shadow: 0 0 20px rgba(180,77,255,0.4);
+        }
+
         /* Responsive */
         @media (max-width: 768px) {
+            .hero-inner { flex-direction: column; text-align: center; }
+            .hero-mascot img { max-width: 240px; }
+            .hero p { margin-left: auto; margin-right: auto; }
+            .hero-cta { width: 100%; text-align: center; }
             .problem-grid, .feature-grid, .persona-grid { grid-template-columns: 1fr; }
             .hero { padding: 60px 0 40px; }
             .section { padding: 48px 0; }
             .tracking-badges { flex-direction: column; align-items: center; }
+            .demo-wrapper { flex-direction: column; }
+            .demo-mascot img { width: 120px; }
+            .pricing-mascot { display: none; }
+            .sticky-cta { display: block; }
+            body { padding-bottom: 72px; }
+            .compare-table { font-size: 12px; }
+            .compare-table th, .compare-table td { padding: 10px 8px; }
         }
     </style>
 </head>
 <body>
     <div class="container">
         <nav>
-            <div class="nav-logo">page<span>on</span></div>
+            <div class="nav-logo">
+                <img src="assets/favicon.png" alt="Pageon" loading="eager">
+                page<span>on</span>
+            </div>
             <a href="#pricing" class="nav-cta">Mulai Sekarang</a>
         </nav>
     </div>
 
     <!-- Hero -->
-    <section class="hero grid-bg">
+    <section class="hero">
         <div class="container">
-            <div class="hero-badge">AI Landing Page Generator</div>
-            <h1>Bikin Landing Page Profesional dalam 3 Menit</h1>
-            <p>Isi form singkat, AI generate LP lengkap — copywriting, desain, tracking pixel. Langsung siap iklan.</p>
-            <a href="#pricing" class="hero-cta">Coba Sekarang — Rp 99.000</a>
-            <div class="hero-sub">
-                <span>⚡</span> Sekali bayar, lifetime · <span>🔑</span> Bring Your Own AI Key · <span>📊</span> Pixel langsung masuk
+            <div class="hero-inner">
+                <div class="hero-text">
+                    <div class="hero-badge">AI Landing Page Generator</div>
+                    <h1>Bikin Landing Page Profesional dalam 3 Menit</h1>
+                    <p>Isi form singkat, AI generate LP lengkap — copywriting, desain, tracking pixel. Langsung siap iklan.</p>
+                    <a href="#pricing" class="hero-cta">Coba Sekarang — Rp 99.000</a>
+                    <div class="hero-sub">
+                        <span>&#9889;</span> Sekali bayar, lifetime · <span>&#128273;</span> Bring Your Own AI Key · <span>&#128202;</span> Pixel langsung masuk
+                    </div>
+                </div>
+                <div class="hero-mascot">
+                    <img src="assets/mascot/pidgo-hero.png" alt="Pidge showing a landing page" loading="eager">
+                </div>
             </div>
         </div>
     </section>
@@ -343,46 +506,58 @@
     <!-- Ticker -->
     <div class="ticker">
         <div class="ticker-inner">
-            <span>🔥 500+ LP dibuat</span> · <span>⚡ 3 menit generate</span> · <span>📊 Meta Pixel baked-in</span> · <span>🤖 Claude + GPT + Gemini</span> · <span>💰 Rp 99K sekali bayar</span> · <span>🇮🇩 Buatan Indonesia</span> ·
-            <span>🔥 500+ LP dibuat</span> · <span>⚡ 3 menit generate</span> · <span>📊 Meta Pixel baked-in</span> · <span>🤖 Claude + GPT + Gemini</span> · <span>💰 Rp 99K sekali bayar</span> · <span>🇮🇩 Buatan Indonesia</span> ·
+            <span>&#128293; 500+ LP dibuat</span> · <span>&#9889; 3 menit generate</span> · <span>&#128202; Meta Pixel baked-in</span> · <span>&#129302; Claude + GPT + Gemini</span> · <span>&#128176; Rp 99K sekali bayar</span> · <span>&#127470;&#127465; Buatan Indonesia</span> ·
+            <span>&#128293; 500+ LP dibuat</span> · <span>&#9889; 3 menit generate</span> · <span>&#128202; Meta Pixel baked-in</span> · <span>&#129302; Claude + GPT + Gemini</span> · <span>&#128176; Rp 99K sekali bayar</span> · <span>&#127470;&#127465; Buatan Indonesia</span> ·
         </div>
     </div>
 
     <!-- Speed Demo -->
-    <section class="section">
+    <section class="section fade-in">
         <div class="container">
             <div class="section-label">Lihat Cara Kerjanya</div>
-            <div class="section-title">Form → AI → Landing Page. Done.</div>
-            <div class="demo-frame">
-                <div class="demo-frame-bar">
-                    <div class="demo-dot"></div><div class="demo-dot"></div><div class="demo-dot"></div>
-                    <span class="demo-url">lp.weedlabs.online/generator</span>
+            <div class="section-title">Form &rarr; AI &rarr; Landing Page. Done.</div>
+            <div class="demo-wrapper">
+                <div class="demo-mascot">
+                    <img src="assets/mascot/pidgo-typing.png" alt="Pidge typing on laptop" loading="lazy">
                 </div>
-                <div class="demo-content">
-                    [ Speed demo video / GIF here ]
+                <div class="demo-frame">
+                    <div class="demo-frame-bar">
+                        <div class="demo-dot"></div><div class="demo-dot"></div><div class="demo-dot"></div>
+                        <span class="demo-url">pageon.app/generator</span>
+                    </div>
+                    <div class="demo-content">
+                        <img src="assets/brand/browser-hero.png" alt="LP Engine browser preview" loading="lazy">
+                        <div class="demo-caption">
+                            <span>Pidge</span> lagi bikinin LP kamu...<br>
+                            Isi form &rarr; Generate &rarr; Edit &rarr; Export. Selesai.
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- Problem -->
-    <section class="section section-alt">
+    <section class="section section-alt fade-in">
         <div class="container">
             <div class="section-label">Masalahnya</div>
             <div class="section-title">Bikin LP Itu Ribet. Sampai Sekarang.</div>
+            <div class="problem-visual">
+                <img src="assets/mascot/pidgo-vs-old.png" alt="Before and after using Pageon" loading="lazy">
+            </div>
             <div class="problem-grid">
                 <div class="problem-card">
-                    <div class="problem-icon">😩</div>
+                    <div class="problem-icon">&#128553;</div>
                     <h3>Bikin Sendiri? 3 Hari.</h3>
                     <p>Buka Canva, coba HTML, copy-paste dari sana-sini. Hasilnya? Masih jelek.</p>
                 </div>
                 <div class="problem-card">
-                    <div class="problem-icon">💸</div>
+                    <div class="problem-icon">&#128184;</div>
                     <h3>Hire Desainer? Rp 3-10 Juta.</h3>
                     <p>Buat satu halaman. Mau revisi? Tambah biaya. Mau halaman baru? Mulai dari nol.</p>
                 </div>
                 <div class="problem-card">
-                    <div class="problem-icon">😵</div>
+                    <div class="problem-icon">&#128565;</div>
                     <h3>Tool Lain? Output Generic.</h3>
                     <p>Generate LP, done. Tapi ga bisa edit. Ga ada pixel tracking. Harus pasang sendiri.</p>
                 </div>
@@ -391,38 +566,38 @@
     </section>
 
     <!-- Features -->
-    <section class="section">
+    <section class="section fade-in">
         <div class="container">
             <div class="section-label">Fitur</div>
             <div class="section-title">Semua Yang Kamu Butuhkan. Satu Tool.</div>
             <div class="feature-grid">
                 <div class="feature-card">
-                    <div class="feature-icon">🤖</div>
+                    <img class="feature-icon-img" src="assets/icons/icon-ai-brain.png" alt="AI" loading="lazy">
                     <h3>Multi-AI Engine</h3>
                     <p>Pilih Claude, ChatGPT, atau Gemini. Bring your own API key — kamu yang kontrol.</p>
                 </div>
                 <div class="feature-card">
-                    <div class="feature-icon">✏️</div>
+                    <img class="feature-icon-img" src="assets/icons/icon-edit-pencil.png" alt="Edit" loading="lazy">
                     <h3>Edit Langsung di Preview</h3>
                     <p>Klik teks, ubah. Klik tombol, ganti. Ga perlu buka code editor.</p>
                 </div>
                 <div class="feature-card">
-                    <div class="feature-icon">📊</div>
+                    <img class="feature-icon-img" src="assets/icons/icon-pixel-meta.png" alt="Tracking" loading="lazy">
                     <h3>Tracking Pixel Baked-in</h3>
                     <p>Meta Pixel, TikTok, Google Tag — langsung ter-inject di HTML. Pilih event per tombol.</p>
                 </div>
                 <div class="feature-card">
-                    <div class="feature-icon">🎨</div>
+                    <img class="feature-icon-img" src="assets/icons/icon-template-card.png" alt="Templates" loading="lazy">
                     <h3>6 Template Profesional</h3>
                     <p>Product Launch, Sales Page, App, Lead Magnet, Course, Link in Bio.</p>
                 </div>
                 <div class="feature-card">
-                    <div class="feature-icon">✨</div>
+                    <img class="feature-icon-img" src="assets/icons/icon-drag-handle.png" alt="AI Rewrite" loading="lazy">
                     <h3>AI Rewrite Per Elemen</h3>
                     <p>Klik headline, ketik "bikin lebih urgent". AI tulis ulang cuma bagian itu.</p>
                 </div>
                 <div class="feature-card">
-                    <div class="feature-icon">📱</div>
+                    <img class="feature-icon-img" src="assets/icons/icon-responsive.png" alt="Responsive" loading="lazy">
                     <h3>Responsive by Default</h3>
                     <p>Semua LP yang di-generate otomatis responsive. Desktop, tablet, HP.</p>
                 </div>
@@ -431,62 +606,79 @@
     </section>
 
     <!-- Tracking Highlight -->
-    <section class="tracking-highlight">
+    <section class="tracking-highlight fade-in">
         <div class="container">
-            <div class="section-label">Diferensiator #1</div>
-            <h2>Tool lain bikin LP. <span>LP Engine pasangin pixel-nya.</span></h2>
-            <p>Kamu habis Rp 500K/hari buat Meta Ads tapi LP-mu ga ada pixel? Data hilang. Konversi ga ke-track. LP Engine solve ini dari awal.</p>
-            <div class="tracking-badges">
-                <div class="tracking-badge">Meta Pixel ✓</div>
-                <div class="tracking-badge">TikTok Pixel ✓</div>
-                <div class="tracking-badge">Google Tag ✓</div>
-                <div class="tracking-badge">Event per CTA ✓</div>
+            <div class="tracking-inner">
+                <div class="section-label">Diferensiator #1</div>
+                <h2>Tool lain bikin LP. <span>Pageon pasangin pixel-nya.</span></h2>
+                <div class="tracking-mascot">
+                    <img src="assets/mascot/pidgo-wiring.png" alt="Pidge connecting tracking pixels to landing page" loading="lazy">
+                </div>
+                <p>Kamu habis Rp 500K/hari buat Meta Ads tapi LP-mu ga ada pixel? Data hilang. Konversi ga ke-track. Pageon solve ini dari awal.</p>
+                <div class="tracking-badges">
+                    <div class="tracking-badge">
+                        <img src="assets/icons/icon-pixel-meta.png" alt="Meta">
+                        Meta Pixel &#10003;
+                    </div>
+                    <div class="tracking-badge">
+                        <img src="assets/icons/icon-pixel-tiktok.png" alt="TikTok">
+                        TikTok Pixel &#10003;
+                    </div>
+                    <div class="tracking-badge">
+                        <img src="assets/icons/icon-pixel-google.png" alt="Google">
+                        Google Tag &#10003;
+                    </div>
+                    <div class="tracking-badge">
+                        <img src="assets/icons/icon-speed-clock.png" alt="Events">
+                        Event per CTA &#10003;
+                    </div>
+                </div>
             </div>
         </div>
     </section>
 
     <!-- Comparison -->
-    <section class="section section-alt">
+    <section class="section section-alt fade-in">
         <div class="container">
             <div class="section-label">Perbandingan</div>
-            <div class="section-title">LP Engine vs Alternatif</div>
+            <div class="section-title">Pageon vs Alternatif</div>
             <table class="compare-table">
                 <tr>
                     <th></th>
                     <th>Bikin Sendiri</th>
                     <th>Jasa Desain</th>
                     <th>sesuaiformat</th>
-                    <th class="ours">LP Engine</th>
+                    <th class="ours">Pageon</th>
                 </tr>
                 <tr><td>Harga</td><td>Gratis (+ waktu)</td><td>Rp 3-10 Juta</td><td>Rp 145.000</td><td>Rp 99.000</td></tr>
                 <tr><td>Waktu</td><td>3-7 hari</td><td>1-2 minggu</td><td>5 menit</td><td>3 menit</td></tr>
-                <tr><td>Edit di Preview</td><td>❌</td><td>❌ (revisi manual)</td><td>❌</td><td>✓</td></tr>
-                <tr><td>Tracking Pixel</td><td>Pasang sendiri</td><td>Minta desainer</td><td>❌</td><td>✓ Otomatis</td></tr>
-                <tr><td>AI Rewrite</td><td>❌</td><td>❌</td><td>Regenerate semua</td><td>✓ Per elemen</td></tr>
-                <tr><td>Multi-AI</td><td>❌</td><td>❌</td><td>1 provider</td><td>✓ 3 provider</td></tr>
-                <tr><td>Drag & Drop</td><td>❌</td><td>❌</td><td>❌</td><td>✓</td></tr>
+                <tr><td>Edit di Preview</td><td>&#10060;</td><td>&#10060; (revisi manual)</td><td>&#10060;</td><td>&#10003;</td></tr>
+                <tr><td>Tracking Pixel</td><td>Pasang sendiri</td><td>Minta desainer</td><td>&#10060;</td><td>&#10003; Otomatis</td></tr>
+                <tr><td>AI Rewrite</td><td>&#10060;</td><td>&#10060;</td><td>Regenerate semua</td><td>&#10003; Per elemen</td></tr>
+                <tr><td>Multi-AI</td><td>&#10060;</td><td>&#10060;</td><td>1 provider</td><td>&#10003; 3 provider</td></tr>
+                <tr><td>Drag & Drop</td><td>&#10060;</td><td>&#10060;</td><td>&#10060;</td><td>&#10003;</td></tr>
             </table>
         </div>
     </section>
 
     <!-- Personas -->
-    <section class="section">
+    <section class="section fade-in">
         <div class="container">
             <div class="section-label">Cocok Buat</div>
-            <div class="section-title">Siapa Yang Butuh LP Engine?</div>
+            <div class="section-title">Siapa Yang Butuh Pageon?</div>
             <div class="persona-grid">
                 <div class="persona-card">
-                    <div class="persona-emoji">👩‍💻</div>
+                    <img class="persona-avatar" src="assets/mascot/pidgo-typing.png" alt="Digital Product Seller" loading="lazy">
                     <h3>Digital Product Seller</h3>
                     <p>Jualan ebook, template, course di Scalev. Butuh LP yang convert tapi ga mau bayar jasa desain tiap produk baru.</p>
                 </div>
                 <div class="persona-card">
-                    <div class="persona-emoji">🏪</div>
+                    <img class="persona-avatar" src="assets/mascot/pidgo-export.png" alt="Pemilik UMKM" loading="lazy">
                     <h3>Pemilik UMKM</h3>
                     <p>Jualan skincare, fashion, F&B online. Sudah ngiklan tapi LP-nya masih seadanya. Perlu upgrade tanpa ribet.</p>
                 </div>
                 <div class="persona-card">
-                    <div class="persona-emoji">🎨</div>
+                    <img class="persona-avatar" src="assets/mascot/pidgo-multi-ai.png" alt="Freelance Designer" loading="lazy">
                     <h3>Freelance Designer</h3>
                     <p>Handle 10+ klien. Butuh speed. Generate LP dalam menit, polish, deliver. 10x lebih cepat dari manual.</p>
                 </div>
@@ -495,58 +687,64 @@
     </section>
 
     <!-- Pricing -->
-    <section class="section section-alt" id="pricing">
+    <section class="section section-alt fade-in" id="pricing">
         <div class="container">
             <div class="section-label">Harga</div>
             <div class="section-title">Satu Harga. Selamanya.</div>
 
             <!-- Offer Stack -->
             <div style="max-width: 480px; margin: 0 auto 32px;">
-                <div class="offer-item"><span class="check">✓</span><span class="name">LP Engine — Lifetime Access</span><span class="value">Rp 500.000</span></div>
-                <div class="offer-item"><span class="check">✓</span><span class="name">6 Template Profesional</span><span class="value">Rp 300.000</span></div>
-                <div class="offer-item"><span class="check">✓</span><span class="name">Tracking Pixel Integration</span><span class="value">Rp 200.000</span></div>
-                <div class="offer-item"><span class="check">✓</span><span class="name">AI Rewrite & Inline Edit</span><span class="value">Rp 200.000</span></div>
-                <div class="offer-item"><span class="check">✓</span><span class="name">Image Upload & Block Editor</span><span class="value">Rp 100.000</span></div>
+                <div class="offer-item"><span class="check">&#10003;</span><span class="name">Pageon — Lifetime Access</span><span class="value">Rp 500.000</span></div>
+                <div class="offer-item"><span class="check">&#10003;</span><span class="name">6 Template Profesional</span><span class="value">Rp 300.000</span></div>
+                <div class="offer-item"><span class="check">&#10003;</span><span class="name">Tracking Pixel Integration</span><span class="value">Rp 200.000</span></div>
+                <div class="offer-item"><span class="check">&#10003;</span><span class="name">AI Rewrite & Inline Edit</span><span class="value">Rp 200.000</span></div>
+                <div class="offer-item"><span class="check">&#10003;</span><span class="name">Image Upload & Block Editor</span><span class="value">Rp 100.000</span></div>
                 <div class="offer-total">
                     <div class="offer-total-old">Total Nilai: Rp 1.300.000</div>
                 </div>
             </div>
 
-            <div class="pricing-card">
-                <div class="pricing-old">Rp 1.300.000</div>
-                <div class="pricing-amount">Rp 99.000</div>
-                <div class="pricing-period">Sekali bayar · Lifetime · BYOK</div>
-                <ul class="pricing-features">
-                    <li>Generate unlimited landing pages</li>
-                    <li>12 section LP structure (proven converting)</li>
-                    <li>Meta, TikTok, Google pixel injection</li>
-                    <li>Claude, ChatGPT, Gemini support</li>
-                    <li>Inline editing + AI rewrite</li>
-                    <li>Drag-and-drop sections & blocks</li>
-                    <li>Image upload</li>
-                    <li>HTML export — deploy anywhere</li>
-                </ul>
-                <a href="#" class="pricing-cta">Mulai Bikin LP Sekarang</a>
-                <div class="pricing-trust">
-                    <span>🔒 Pembayaran Aman</span>
-                    <span>⚡ Akses Instant</span>
-                    <span>🔑 BYOK</span>
+            <div class="pricing-wrapper">
+                <div class="pricing-mascot">
+                    <img src="assets/mascot/pidgo-rocket.png" alt="Pidge launching" loading="lazy">
+                </div>
+                <div class="pricing-card">
+                    <div class="pricing-old">Rp 1.300.000</div>
+                    <div class="pricing-amount">Rp 99.000</div>
+                    <div class="pricing-period">Sekali bayar · Lifetime · BYOK</div>
+                    <ul class="pricing-features">
+                        <li>Generate unlimited landing pages</li>
+                        <li>12 section LP structure (proven converting)</li>
+                        <li>Meta, TikTok, Google pixel injection</li>
+                        <li>Claude, ChatGPT, Gemini support</li>
+                        <li>Inline editing + AI rewrite</li>
+                        <li>Drag-and-drop sections & blocks</li>
+                        <li>Image upload</li>
+                        <li>HTML export — deploy anywhere</li>
+                    </ul>
+                    <a href="#" class="pricing-cta">Mulai Bikin LP Sekarang</a>
+                    <div class="pricing-trust">
+                        <span>&#128274; Pembayaran Aman</span>
+                        <span>&#9889; Akses Instant</span>
+                        <span>&#128273; BYOK</span>
+                    </div>
+                    <div class="pricing-urgency">&#128293; Harga launch — naik kapan saja</div>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- FAQ -->
-    <section class="section">
+    <section class="section fade-in">
         <div class="container">
             <div class="section-label">FAQ</div>
             <div class="section-title">Pertanyaan Yang Sering Ditanya</div>
             <div style="max-width: 640px; margin: 0 auto;">
                 <details class="faq-item"><summary>Butuh coding ga? <span></span></summary><p>Engga sama sekali. Tinggal isi form, pilih template, klik Generate. LP langsung jadi. Mau edit? Klik langsung di preview.</p></details>
                 <details class="faq-item"><summary>AI-nya pake apa? <span></span></summary><p>Kamu pilih sendiri: Claude (Anthropic), ChatGPT (OpenAI), atau Gemini (Google). Bring Your Own Key — kamu yang kontrol biaya dan quality.</p></details>
-                <details class="faq-item"><summary>Bisa dipake di Scalev? <span></span></summary><p>Bisa. LP Engine output clean HTML yang compatible dengan Scalev, Lynk.id, WordPress, Shopify, atau deploy sendiri di hosting manapun.</p></details>
-                <details class="faq-item"><summary>Pixel tracking itu apa? <span></span></summary><p>Kode kecil yang nge-track siapa yang visit, klik, dan beli di LP kamu. Penting banget kalau kamu jalanin iklan Meta/TikTok. LP Engine inject pixel-nya otomatis ke HTML — kamu tinggal masukkan ID.</p></details>
-                <details class="faq-item"><summary>Bedanya sama sesuaiformat? <span></span></summary><p>sesuaiformat generate LP, done. LP Engine generate LP + bisa edit langsung di preview + tracking pixel langsung baked-in + support 3 AI provider + drag-and-drop. Dan lebih murah (Rp 99K vs Rp 145K).</p></details>
+                <details class="faq-item"><summary>Bisa dipake di Scalev? <span></span></summary><p>Bisa. Pageon output clean HTML yang compatible dengan Scalev, Lynk.id, WordPress, Shopify, atau deploy sendiri di hosting manapun.</p></details>
+                <details class="faq-item"><summary>Pixel tracking itu apa? <span></span></summary><p>Kode kecil yang nge-track siapa yang visit, klik, dan beli di LP kamu. Penting banget kalau kamu jalanin iklan Meta/TikTok. Pageon inject pixel-nya otomatis ke HTML — kamu tinggal masukkan ID.</p></details>
+                <details class="faq-item"><summary>Bedanya sama sesuaiformat? <span></span></summary><p>sesuaiformat generate LP, done. Pageon generate LP + bisa edit langsung di preview + tracking pixel langsung baked-in + support 3 AI provider + drag-and-drop. Dan lebih murah (Rp 99K vs Rp 145K).</p></details>
                 <details class="faq-item"><summary>Kalau ga cocok gimana? <span></span></summary><p>Garansi 7 hari uang kembali. No questions asked.</p></details>
             </div>
         </div>
@@ -555,13 +753,41 @@
     <!-- Footer -->
     <footer class="footer grid-bg">
         <div class="container">
+            <div class="footer-mascot">
+                <img src="assets/mascot/pidgo-base.png" alt="Pidge" loading="lazy">
+            </div>
             <div class="footer-links">
                 <a href="https://weedlabs.online">weedlabs.online</a>
                 <a href="https://instagram.com/buildwithdeee">@buildwithdeee</a>
                 <a href="mailto:hi@weedlabs.online">Contact</a>
             </div>
-            <p class="footer-copy">© 2026 Weed Labs · Pageon · Bangga Buatan Indonesia 🇮🇩</p>
+            <p class="footer-copy">&copy; 2026 Weed Labs · Pageon · Bangga Buatan Indonesia &#127470;&#127465;</p>
         </div>
     </footer>
+
+    <!-- Sticky mobile CTA -->
+    <div class="sticky-cta">
+        <a href="#pricing">Coba Sekarang — Rp 99.000</a>
+    </div>
+
+    <!-- Scroll fade-in observer -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            var els = document.querySelectorAll('.fade-in');
+            if ('IntersectionObserver' in window) {
+                var obs = new IntersectionObserver(function(entries) {
+                    entries.forEach(function(e) {
+                        if (e.isIntersecting) {
+                            e.target.classList.add('visible');
+                            obs.unobserve(e.target);
+                        }
+                    });
+                }, { threshold: 0.1 });
+                els.forEach(function(el) { obs.observe(el); });
+            } else {
+                els.forEach(function(el) { el.classList.add('visible'); });
+            }
+        });
+    </script>
 </body>
 </html>
