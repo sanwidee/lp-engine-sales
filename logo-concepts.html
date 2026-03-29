@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pageon — Poring with Wings</title>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { background: #f5f5f5; color: #1a1a1a; font-family: 'Inter', sans-serif; padding: 40px 24px; }
+        .container { max-width: 960px; margin: 0 auto; }
+        h1 { text-align: center; font-size: 12px; color: #999; margin-bottom: 48px; letter-spacing: 0.1em; text-transform: uppercase; }
+        .row { display: flex; justify-content: center; gap: 24px; flex-wrap: wrap; align-items: flex-end; margin-bottom: 48px; }
+        .variant { text-align: center; }
+        .variant-label { font-size: 10px; color: #bbb; margin-top: 8px; }
+        .wordmark { font-family: 'Space Grotesk', sans-serif; font-weight: 700; letter-spacing: -0.02em; }
+        .section-label { font-size: 11px; color: #999; letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 20px; text-align: center; }
+    </style>
+</head>
+<body>
+<div class="container">
+
+<h1>Pageon — Poring with Wings + Page</h1>
+
+<!-- Large preview -->
+<div class="section-label">Large Preview</div>
+<div class="row">
+    <div class="variant">
+        <svg width="200" height="200" viewBox="0 0 72 72">
+            <rect width="72" height="72" rx="16" fill="#ff2d78"/>
+            <!-- Poring blob body -->
+            <ellipse cx="28" cy="38" rx="20" ry="22" fill="white"/>
+            <!-- Eyes — dots -->
+            <circle cx="22" cy="34" r="2.2" fill="#ff2d78"/>
+            <circle cx="34" cy="34" r="2.2" fill="#ff2d78"/>
+            <!-- Smile — simple arc -->
+            <path d="M22 40 Q28 46 34 40" fill="none" stroke="#ff2d78" stroke-width="2" stroke-linecap="round"/>
+            <!-- Left wing -->
+            <path d="M8 32 C2 28 0 22 4 18 C8 16 12 20 14 24 C16 28 12 34 8 36" fill="white"/>
+            <!-- Right wing (behind page) -->
+            <path d="M48 32 C52 28 56 24 56 20 C56 16 52 16 50 18 C48 22 46 28 46 32" fill="white"/>
+            <!-- Page -->
+            <rect x="44" y="26" width="22" height="30" rx="4" fill="rgba(255,255,255,0.3)"/>
+            <rect x="48" y="31" width="14" height="4" rx="1.5" fill="rgba(255,255,255,0.35)"/>
+            <rect x="48" y="38" width="14" height="2" rx="1" fill="rgba(255,255,255,0.2)"/>
+            <rect x="48" y="42.5" width="14" height="2" rx="1" fill="rgba(255,255,255,0.2)"/>
+            <rect x="50" y="48" width="10" height="3.5" rx="1.5" fill="rgba(255,255,255,0.3)"/>
+        </svg>
+        <div class="variant-label">Pink — 200px</div>
+    </div>
+</div>
+
+<!-- App icons -->
+<div class="section-label">App Icons</div>
+<div class="row">
+    <div class="variant">
+        <svg width="80" height="80" viewBox="0 0 72 72">
+            <rect width="72" height="72" rx="16" fill="#ff2d78"/>
+            <ellipse cx="28" cy="38" rx="20" ry="22" fill="white"/>
+            <circle cx="22" cy="34" r="2.2" fill="#ff2d78"/>
+            <circle cx="34" cy="34" r="2.2" fill="#ff2d78"/>
+            <path d="M22 40 Q28 46 34 40" fill="none" stroke="#ff2d78" stroke-width="2" stroke-linecap="round"/>
+            <path d="M8 32 C2 28 0 22 4 18 C8 16 12 20 14 24 C16 28 12 34 8 36" fill="white"/>
+            <path d="M48 32 C52 28 56 24 56 20 C56 16 52 16 50 18 C48 22 46 28 46 32" fill="white"/>
+            <rect x="44" y="26" width="22" height="30" rx="4" fill="rgba(255,255,255,0.3)"/>
+            <rect x="48" y="31" width="14" height="4" rx="1.5" fill="rgba(255,255,255,0.35)"/>
+            <rect x="48" y="38" width="14" height="2" rx="1" fill="rgba(255,255,255,0.2)"/>
+            <rect x="48" y="42.5" width="14" height="2" rx="1" fill="rgba(255,255,255,0.2)"/>
+            <rect x="50" y="48" width="10" height="3.5" rx="1.5" fill="rgba(255,255,255,0.3)"/>
+        </svg>
+        <div class="variant-label">Pink</div>
+    </div>
+    <div class="variant">
+        <svg width="80" height="80" viewBox="0 0 72 72">
+            <rect width="72" height="72" rx="16" fill="#0a0a0f"/>
+            <ellipse cx="28" cy="38" rx="20" ry="22" fill="#ff2d78"/>
+            <circle cx="22" cy="34" r="2.2" fill="#0a0a0f"/>
+            <circle cx="34" cy="34" r="2.2" fill="#0a0a0f"/>
+            <path d="M22 40 Q28 46 34 40" fill="none" stroke="#0a0a0f" stroke-width="2" stroke-linecap="round"/>
+            <path d="M8 32 C2 28 0 22 4 18 C8 16 12 20 14 24 C16 28 12 34 8 36" fill="#ff2d78"/>
+            <path d="M48 32 C52 28 56 24 56 20 C56 16 52 16 50 18 C48 22 46 28 46 32" fill="#ff2d78"/>
+            <rect x="44" y="26" width="22" height="30" rx="4" fill="#1a1a2e"/>
+            <rect x="48" y="31" width="14" height="4" rx="1.5" fill="rgba(255,255,255,0.08)"/>
+            <rect x="48" y="38" width="14" height="2" rx="1" fill="rgba(255,255,255,0.05)"/>
+            <rect x="48" y="42.5" width="14" height="2" rx="1" fill="rgba(255,255,255,0.05)"/>
+            <rect x="50" y="48" width="10" height="3.5" rx="1.5" fill="rgba(255,255,255,0.08)"/>
+        </svg>
+        <div class="variant-label">Dark</div>
+    </div>
+    <div class="variant">
+        <svg width="80" height="80" viewBox="0 0 72 72">
+            <rect width="72" height="72" rx="16" fill="white" stroke="#eee"/>
+            <ellipse cx="28" cy="38" rx="20" ry="22" fill="#1a1a1a"/>
+            <circle cx="22" cy="34" r="2.2" fill="white"/>
+            <circle cx="34" cy="34" r="2.2" fill="white"/>
+            <path d="M22 40 Q28 46 34 40" fill="none" stroke="white" stroke-width="2" stroke-linecap="round"/>
+            <path d="M8 32 C2 28 0 22 4 18 C8 16 12 20 14 24 C16 28 12 34 8 36" fill="#1a1a1a"/>
+            <path d="M48 32 C52 28 56 24 56 20 C56 16 52 16 50 18 C48 22 46 28 46 32" fill="#1a1a1a"/>
+            <rect x="44" y="26" width="22" height="30" rx="4" fill="#f0f0f0"/>
+            <rect x="48" y="31" width="14" height="4" rx="1.5" fill="#ddd"/>
+            <rect x="48" y="38" width="14" height="2" rx="1" fill="#e5e5e5"/>
+            <rect x="48" y="42.5" width="14" height="2" rx="1" fill="#e5e5e5"/>
+            <rect x="50" y="48" width="10" height="3.5" rx="1.5" fill="#ddd"/>
+        </svg>
+        <div class="variant-label">Mono</div>
+    </div>
+    <div class="variant">
+        <svg width="80" height="80" viewBox="0 0 72 72">
+            <defs><linearGradient id="g1" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#ff2d78"/><stop offset="100%" stop-color="#b44dff"/></linearGradient></defs>
+            <rect width="72" height="72" rx="16" fill="url(#g1)"/>
+            <ellipse cx="28" cy="38" rx="20" ry="22" fill="white"/>
+            <circle cx="22" cy="34" r="2.2" fill="#b44dff"/>
+            <circle cx="34" cy="34" r="2.2" fill="#b44dff"/>
+            <path d="M22 40 Q28 46 34 40" fill="none" stroke="#b44dff" stroke-width="2" stroke-linecap="round"/>
+            <path d="M8 32 C2 28 0 22 4 18 C8 16 12 20 14 24 C16 28 12 34 8 36" fill="white"/>
+            <path d="M48 32 C52 28 56 24 56 20 C56 16 52 16 50 18 C48 22 46 28 46 32" fill="white"/>
+            <rect x="44" y="26" width="22" height="30" rx="4" fill="rgba(255,255,255,0.3)"/>
+            <rect x="48" y="31" width="14" height="4" rx="1.5" fill="rgba(255,255,255,0.35)"/>
+            <rect x="48" y="38" width="14" height="2" rx="1" fill="rgba(255,255,255,0.2)"/>
+            <rect x="48" y="42.5" width="14" height="2" rx="1" fill="rgba(255,255,255,0.2)"/>
+            <rect x="50" y="48" width="10" height="3.5" rx="1.5" fill="rgba(255,255,255,0.3)"/>
+        </svg>
+        <div class="variant-label">Gradient</div>
+    </div>
+</div>
+
+<!-- Size test -->
+<div class="section-label">Size Test</div>
+<div class="row" style="align-items: center;">
+    <div class="variant"><svg width="16" height="16" viewBox="0 0 72 72"><rect width="72" height="72" rx="16" fill="#ff2d78"/><ellipse cx="28" cy="38" rx="20" ry="22" fill="white"/><path d="M8 32 C2 28 0 22 4 18 C8 16 12 20 14 24 C16 28 12 34 8 36" fill="white"/><path d="M48 32 C52 28 56 24 56 20 C56 16 52 16 50 18 C48 22 46 28 46 32" fill="white"/><rect x="44" y="26" width="22" height="30" rx="4" fill="rgba(255,255,255,0.3)"/></svg><div class="variant-label">16</div></div>
+    <div class="variant"><svg width="24" height="24" viewBox="0 0 72 72"><rect width="72" height="72" rx="16" fill="#ff2d78"/><ellipse cx="28" cy="38" rx="20" ry="22" fill="white"/><circle cx="22" cy="34" r="2.2" fill="#ff2d78"/><circle cx="34" cy="34" r="2.2" fill="#ff2d78"/><path d="M22 40 Q28 46 34 40" fill="none" stroke="#ff2d78" stroke-width="2" stroke-linecap="round"/><path d="M8 32 C2 28 0 22 4 18 C8 16 12 20 14 24 C16 28 12 34 8 36" fill="white"/><path d="M48 32 C52 28 56 24 56 20 C56 16 52 16 50 18 C48 22 46 28 46 32" fill="white"/><rect x="44" y="26" width="22" height="30" rx="4" fill="rgba(255,255,255,0.3)"/></svg><div class="variant-label">24</div></div>
+    <div class="variant"><svg width="32" height="32" viewBox="0 0 72 72"><rect width="72" height="72" rx="16" fill="#ff2d78"/><ellipse cx="28" cy="38" rx="20" ry="22" fill="white"/><circle cx="22" cy="34" r="2.2" fill="#ff2d78"/><circle cx="34" cy="34" r="2.2" fill="#ff2d78"/><path d="M22 40 Q28 46 34 40" fill="none" stroke="#ff2d78" stroke-width="2" stroke-linecap="round"/><path d="M8 32 C2 28 0 22 4 18 C8 16 12 20 14 24 C16 28 12 34 8 36" fill="white"/><path d="M48 32 C52 28 56 24 56 20 C56 16 52 16 50 18 C48 22 46 28 46 32" fill="white"/><rect x="44" y="26" width="22" height="30" rx="4" fill="rgba(255,255,255,0.3)"/></svg><div class="variant-label">32</div></div>
+    <div class="variant"><svg width="48" height="48" viewBox="0 0 72 72"><rect width="72" height="72" rx="16" fill="#ff2d78"/><ellipse cx="28" cy="38" rx="20" ry="22" fill="white"/><circle cx="22" cy="34" r="2.2" fill="#ff2d78"/><circle cx="34" cy="34" r="2.2" fill="#ff2d78"/><path d="M22 40 Q28 46 34 40" fill="none" stroke="#ff2d78" stroke-width="2" stroke-linecap="round"/><path d="M8 32 C2 28 0 22 4 18 C8 16 12 20 14 24 C16 28 12 34 8 36" fill="white"/><path d="M48 32 C52 28 56 24 56 20 C56 16 52 16 50 18 C48 22 46 28 46 32" fill="white"/><rect x="44" y="26" width="22" height="30" rx="4" fill="rgba(255,255,255,0.3)"/><rect x="48" y="31" width="14" height="4" rx="1.5" fill="rgba(255,255,255,0.35)"/><rect x="48" y="38" width="14" height="2" rx="1" fill="rgba(255,255,255,0.2)"/><rect x="48" y="42.5" width="14" height="2" rx="1" fill="rgba(255,255,255,0.2)"/><rect x="50" y="48" width="10" height="3.5" rx="1.5" fill="rgba(255,255,255,0.3)"/></svg><div class="variant-label">48</div></div>
+    <div class="variant"><svg width="72" height="72" viewBox="0 0 72 72"><rect width="72" height="72" rx="16" fill="#ff2d78"/><ellipse cx="28" cy="38" rx="20" ry="22" fill="white"/><circle cx="22" cy="34" r="2.2" fill="#ff2d78"/><circle cx="34" cy="34" r="2.2" fill="#ff2d78"/><path d="M22 40 Q28 46 34 40" fill="none" stroke="#ff2d78" stroke-width="2" stroke-linecap="round"/><path d="M8 32 C2 28 0 22 4 18 C8 16 12 20 14 24 C16 28 12 34 8 36" fill="white"/><path d="M48 32 C52 28 56 24 56 20 C56 16 52 16 50 18 C48 22 46 28 46 32" fill="white"/><rect x="44" y="26" width="22" height="30" rx="4" fill="rgba(255,255,255,0.3)"/><rect x="48" y="31" width="14" height="4" rx="1.5" fill="rgba(255,255,255,0.35)"/><rect x="48" y="38" width="14" height="2" rx="1" fill="rgba(255,255,255,0.2)"/><rect x="48" y="42.5" width="14" height="2" rx="1" fill="rgba(255,255,255,0.2)"/><rect x="50" y="48" width="10" height="3.5" rx="1.5" fill="rgba(255,255,255,0.3)"/></svg><div class="variant-label">72</div></div>
+    <div class="variant"><svg width="120" height="120" viewBox="0 0 72 72"><rect width="72" height="72" rx="16" fill="#ff2d78"/><ellipse cx="28" cy="38" rx="20" ry="22" fill="white"/><circle cx="22" cy="34" r="2.2" fill="#ff2d78"/><circle cx="34" cy="34" r="2.2" fill="#ff2d78"/><path d="M22 40 Q28 46 34 40" fill="none" stroke="#ff2d78" stroke-width="2" stroke-linecap="round"/><path d="M8 32 C2 28 0 22 4 18 C8 16 12 20 14 24 C16 28 12 34 8 36" fill="white"/><path d="M48 32 C52 28 56 24 56 20 C56 16 52 16 50 18 C48 22 46 28 46 32" fill="white"/><rect x="44" y="26" width="22" height="30" rx="4" fill="rgba(255,255,255,0.3)"/><rect x="48" y="31" width="14" height="4" rx="1.5" fill="rgba(255,255,255,0.35)"/><rect x="48" y="38" width="14" height="2" rx="1" fill="rgba(255,255,255,0.2)"/><rect x="48" y="42.5" width="14" height="2" rx="1" fill="rgba(255,255,255,0.2)"/><rect x="50" y="48" width="10" height="3.5" rx="1.5" fill="rgba(255,255,255,0.3)"/></svg><div class="variant-label">120</div></div>
+</div>
+
+<!-- Lockups -->
+<div class="section-label">Lockups</div>
+<div class="row" style="gap: 48px;">
+    <div class="variant">
+        <div style="display: flex; align-items: center; gap: 12px;">
+            <svg width="40" height="40" viewBox="0 0 72 72" fill="none">
+                <ellipse cx="28" cy="38" rx="20" ry="22" fill="#ff2d78"/>
+                <circle cx="22" cy="34" r="2.2" fill="white"/>
+                <circle cx="34" cy="34" r="2.2" fill="white"/>
+                <path d="M22 40 Q28 46 34 40" fill="none" stroke="white" stroke-width="2" stroke-linecap="round"/>
+                <path d="M8 32 C2 28 0 22 4 18 C8 16 12 20 14 24 C16 28 12 34 8 36" fill="#ff2d78"/>
+                <path d="M48 32 C52 28 56 24 56 20 C56 16 52 16 50 18 C48 22 46 28 46 32" fill="#ff2d78"/>
+                <rect x="44" y="26" width="22" height="30" rx="4" fill="#ffb3cc"/>
+            </svg>
+            <span class="wordmark" style="font-size: 28px; color: #1a1a1a;">pageon</span>
+        </div>
+        <div class="variant-label">Light bg</div>
+    </div>
+    <div class="variant" style="background: #0a0a0f; padding: 20px 28px; border-radius: 12px;">
+        <div style="display: flex; align-items: center; gap: 12px;">
+            <svg width="40" height="40" viewBox="0 0 72 72" fill="none">
+                <ellipse cx="28" cy="38" rx="20" ry="22" fill="#ff2d78"/>
+                <circle cx="22" cy="34" r="2.2" fill="#0a0a0f"/>
+                <circle cx="34" cy="34" r="2.2" fill="#0a0a0f"/>
+                <path d="M22 40 Q28 46 34 40" fill="none" stroke="#0a0a0f" stroke-width="2" stroke-linecap="round"/>
+                <path d="M8 32 C2 28 0 22 4 18 C8 16 12 20 14 24 C16 28 12 34 8 36" fill="#ff2d78"/>
+                <path d="M48 32 C52 28 56 24 56 20 C56 16 52 16 50 18 C48 22 46 28 46 32" fill="#ff2d78"/>
+                <rect x="44" y="26" width="22" height="30" rx="4" fill="#1a1a2e"/>
+            </svg>
+            <span class="wordmark" style="font-size: 28px; color: #f0e6d3;">pageon</span>
+        </div>
+        <div class="variant-label">Dark bg</div>
+    </div>
+</div>
+
+</div>
+</body>
+</html>

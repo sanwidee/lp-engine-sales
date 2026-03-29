@@ -628,6 +628,25 @@
             box-shadow: 0 0 20px rgba(180,77,255,0.4);
         }
 
+        /* Brand decorative elements */
+        .sparkle-decor {
+            position: absolute;
+            width: 60px; height: 60px;
+            opacity: 0.12;
+            pointer-events: none;
+            animation: sparkle-float 5s ease-in-out infinite;
+        }
+        @keyframes sparkle-float {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-10px) rotate(5deg); }
+        }
+        .concept-watermark {
+            position: absolute;
+            opacity: 0.04;
+            pointer-events: none;
+            max-width: 300px;
+        }
+
         /* Responsive */
         @media (max-width: 768px) {
             .hero-inner { flex-direction: column; text-align: center; }
@@ -672,8 +691,9 @@
                         <span>&#9889;</span> Sekali bayar, lifetime · <span>&#128273;</span> Bring Your Own AI Key · <span>&#128202;</span> Pixel langsung masuk
                     </div>
                 </div>
-                <div class="hero-mascot">
+                <div class="hero-mascot" style="position:relative;">
                     <img src="assets/mascot/pidgo-hero.png" alt="Pidge showing a landing page" loading="eager">
+                    <img src="assets/brand/sparkles.png" class="sparkle-decor" style="top:-20px;right:-10px;" loading="lazy">
                 </div>
             </div>
         </div>
@@ -742,7 +762,8 @@
     </section>
 
     <!-- Features -->
-    <section class="section fade-in">
+    <section class="section fade-in" style="position:relative;overflow:hidden;">
+        <img src="assets/brand/concept-generate.png" class="concept-watermark" style="right:-80px;top:20px;" loading="lazy">
         <div class="container">
             <div class="section-label">Fitur</div>
             <div class="section-title">Semua Yang Kamu Butuhkan. Satu Tool.</div>
@@ -858,8 +879,9 @@
             <div class="tracking-inner">
                 <div class="section-label">Diferensiator #1</div>
                 <h2>Tool lain bikin LP. <span>Pidgoapp pasangin pixel-nya.</span></h2>
-                <div class="tracking-mascot">
+                <div class="tracking-mascot" style="position:relative;">
                     <img src="assets/mascot/pidgo-wiring.png" alt="Pidge connecting tracking pixels to landing page" loading="lazy">
+                    <img src="assets/brand/sparkles.png" class="sparkle-decor" style="top:-15px;left:-20px;animation-delay:1s;" loading="lazy">
                 </div>
                 <p>Kamu habis Rp 500K/hari buat Meta Ads tapi LP-mu ga ada pixel? Data hilang. Konversi ga ke-track. Pidgoapp solve ini dari awal.</p>
                 <div class="tracking-badges">
@@ -885,7 +907,8 @@
     </section>
 
     <!-- Comparison -->
-    <section class="section section-alt fade-in">
+    <section class="section section-alt fade-in" style="position:relative;overflow:hidden;">
+        <img src="assets/brand/concept-drag-drop.png" class="concept-watermark" style="left:-80px;bottom:20px;" loading="lazy">
         <div class="container">
             <div class="section-label">Perbandingan</div>
             <div class="section-title">Pidgoapp vs Alternatif</div>
