@@ -237,34 +237,210 @@
         }
         .problem-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
         .problem-card {
-            background: var(--deep); border: 1px solid var(--grid); border-radius: 12px;
-            padding: 28px; text-align: center; transition: border-color 0.3s;
+            background: var(--deep); border: 1px solid var(--grid); border-radius: 16px;
+            padding: 32px 24px; text-align: left; transition: all 0.4s ease;
+            position: relative; overflow: hidden;
         }
-        .problem-card:hover { border-color: var(--purple); }
-        .problem-icon { font-size: 32px; margin-bottom: 14px; }
-        .problem-card h3 { font-family: var(--heading); font-size: 16px; margin-bottom: 8px; }
-        .problem-card p { font-size: 14px; color: var(--text-muted); line-height: 1.5; }
+        .problem-card::before {
+            content: '';
+            position: absolute; top: 0; left: 0; width: 100%; height: 3px;
+            background: linear-gradient(90deg, var(--pink), transparent);
+            opacity: 0; transition: opacity 0.4s;
+        }
+        .problem-card:hover { border-color: var(--pink); transform: translateY(-4px); }
+        .problem-card:hover::before { opacity: 1; }
+        .problem-num {
+            font-family: var(--mono); font-size: 11px; color: var(--pink);
+            letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 16px;
+            opacity: 0.7;
+        }
+        .problem-card h3 { font-family: var(--heading); font-size: 17px; margin-bottom: 10px; line-height: 1.3; }
+        .problem-card p { font-size: 14px; color: var(--text-muted); line-height: 1.6; }
 
-        /* Feature cards */
-        .feature-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+        /* Feature cards — animation-driven */
+        .feature-grid {
+            display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px;
+        }
         .feature-card {
-            background: var(--deep); border-radius: 12px; padding: 28px;
-            border: 1px solid transparent;
-            background-image: linear-gradient(var(--deep), var(--deep)), linear-gradient(135deg, var(--grid), var(--grid));
-            background-origin: border-box; background-clip: padding-box, border-box;
-            transition: all 0.3s;
+            background: var(--deep); border-radius: 16px;
+            border: 1px solid var(--grid);
+            overflow: hidden; transition: all 0.4s ease;
         }
         .feature-card:hover {
-            background-image: linear-gradient(var(--deep), var(--deep)), linear-gradient(135deg, var(--purple), var(--cyan));
-            box-shadow: 0 0 20px rgba(0,240,255,0.08);
+            border-color: rgba(0,240,255,0.25);
+            box-shadow: 0 8px 32px rgba(0,240,255,0.06);
         }
-        .feature-icon-img {
-            width: 48px; height: 48px; margin-bottom: 14px;
-            filter: drop-shadow(0 0 8px rgba(0,240,255,0.3));
-            object-fit: contain;
+        /* Animation stage */
+        .feat-stage {
+            height: 160px; position: relative;
+            background: var(--void);
+            border-bottom: 1px solid var(--grid);
+            overflow: hidden;
         }
-        .feature-card h3 { font-family: var(--heading); font-size: 15px; margin-bottom: 6px; }
-        .feature-card p { font-size: 13px; color: var(--text-muted); line-height: 1.5; }
+        /* Card body */
+        .feat-body {
+            padding: 16px 20px 20px;
+        }
+        .feat-label {
+            font-family: var(--mono); font-size: 10px; letter-spacing: 0.1em;
+            text-transform: uppercase; color: var(--cyan); opacity: 0.6;
+            margin-bottom: 6px;
+        }
+        .feat-title {
+            font-family: var(--heading); font-size: 15px; font-weight: 600;
+            line-height: 1.3;
+        }
+
+        /* ── Anim 01: Multi-AI — 3 provider logos cycling ── */
+        .anim-ai { display: flex; align-items: center; justify-content: center; height: 100%; gap: 20px; }
+        .anim-ai-node {
+            width: 52px; height: 52px; border-radius: 12px;
+            border: 1px solid var(--grid); background: var(--deep);
+            display: flex; align-items: center; justify-content: center;
+            font-family: var(--mono); font-size: 11px; font-weight: 600;
+            opacity: 0.3; transition: all 0.3s;
+            position: relative;
+        }
+        .anim-ai-node.active {
+            opacity: 1; border-color: var(--cyan);
+            box-shadow: 0 0 16px rgba(0,240,255,0.2);
+        }
+        .anim-ai-node.active::after {
+            content: ''; position: absolute; top: -4px; right: -4px;
+            width: 8px; height: 8px; border-radius: 50%;
+            background: var(--cyan);
+        }
+        .anim-ai-arrow {
+            font-family: var(--mono); font-size: 18px; color: var(--grid);
+        }
+        .anim-ai-out {
+            width: 80px; height: 52px; border-radius: 12px;
+            border: 1px dashed var(--purple); background: var(--deep);
+            display: flex; align-items: center; justify-content: center;
+            font-family: var(--mono); font-size: 10px; color: var(--purple);
+        }
+
+        /* ── Anim 02: Inline edit — cursor clicking and text changing ── */
+        .anim-edit { padding: 24px; height: 100%; display: flex; flex-direction: column; justify-content: center; gap: 10px; }
+        .anim-edit-line {
+            height: 12px; border-radius: 4px; background: var(--grid);
+        }
+        .anim-edit-line:nth-child(1) { width: 70%; }
+        .anim-edit-line:nth-child(2) { width: 90%; }
+        .anim-edit-line:nth-child(3) { width: 50%; }
+        .anim-edit-active {
+            background: transparent; border: 1px solid var(--cyan);
+            position: relative; overflow: hidden;
+        }
+        .anim-edit-active::before {
+            content: '';
+            position: absolute; left: 0; top: 0; height: 100%;
+            width: 0; background: rgba(0,240,255,0.15);
+            animation: editHighlight 3s ease-in-out infinite;
+        }
+        .anim-edit-cursor {
+            position: absolute; right: 8px; top: 50%; transform: translateY(-50%);
+            width: 1px; height: 10px; background: var(--cyan);
+            animation: blink 0.8s step-end infinite;
+        }
+        @keyframes editHighlight { 0%,100% { width: 0; } 40%,60% { width: 100%; } }
+        @keyframes blink { 0%,100% { opacity: 1; } 50% { opacity: 0; } }
+
+        /* ── Anim 03: Pixel tracking — data flowing into pixel nodes ── */
+        .anim-pixel { height: 100%; display: flex; align-items: center; justify-content: center; gap: 12px; position: relative; }
+        .anim-pixel-dot {
+            width: 6px; height: 6px; border-radius: 50%; background: var(--cyan);
+            position: absolute; opacity: 0;
+        }
+        .anim-pixel-dot:nth-child(1) { animation: pixelFlow 2.5s 0s infinite; left: 10%; top: 30%; }
+        .anim-pixel-dot:nth-child(2) { animation: pixelFlow 2.5s 0.4s infinite; left: 15%; top: 60%; }
+        .anim-pixel-dot:nth-child(3) { animation: pixelFlow 2.5s 0.8s infinite; left: 8%; top: 50%; }
+        .anim-pixel-dot:nth-child(4) { animation: pixelFlow 2.5s 1.2s infinite; left: 20%; top: 40%; }
+        @keyframes pixelFlow {
+            0% { opacity: 0; transform: translateX(0); }
+            20% { opacity: 1; }
+            80% { opacity: 1; }
+            100% { opacity: 0; transform: translateX(200px); }
+        }
+        .anim-pixel-node {
+            width: 44px; height: 44px; border-radius: 10px;
+            border: 1px solid var(--grid); background: var(--deep);
+            display: flex; align-items: center; justify-content: center;
+            font-family: var(--mono); font-size: 9px; color: var(--text-dim);
+            z-index: 1;
+        }
+        .anim-pixel-node:nth-child(6) { animation: pixelPulse 2.5s 0s infinite; }
+        .anim-pixel-node:nth-child(7) { animation: pixelPulse 2.5s 0.8s infinite; }
+        .anim-pixel-node:nth-child(8) { animation: pixelPulse 2.5s 1.6s infinite; }
+        @keyframes pixelPulse {
+            0%,100% { border-color: var(--grid); }
+            50% { border-color: var(--cyan); box-shadow: 0 0 12px rgba(0,240,255,0.15); }
+        }
+
+        /* ── Anim 04: Templates — cards fanning/cycling ── */
+        .anim-tpl { height: 100%; display: flex; align-items: center; justify-content: center; position: relative; }
+        .anim-tpl-card {
+            width: 64px; height: 88px; border-radius: 8px;
+            border: 1px solid var(--grid); background: var(--deep);
+            position: absolute;
+            transition: all 0.5s ease;
+            display: flex; align-items: flex-end; padding: 6px;
+            font-family: var(--mono); font-size: 8px; color: var(--text-dim);
+        }
+        .anim-tpl-card:nth-child(1) { transform: rotate(-12deg) translateX(-36px); z-index: 1; }
+        .anim-tpl-card:nth-child(2) { transform: rotate(-4deg) translateX(-12px); z-index: 2; }
+        .anim-tpl-card:nth-child(3) { transform: rotate(0deg); z-index: 3; border-color: var(--cyan); }
+        .anim-tpl-card:nth-child(4) { transform: rotate(4deg) translateX(12px); z-index: 2; }
+        .anim-tpl-card:nth-child(5) { transform: rotate(12deg) translateX(36px); z-index: 1; }
+        .anim-tpl-card:nth-child(3)::before {
+            content: ''; position: absolute; top: 8px; left: 8px; right: 8px; height: 32px;
+            border-radius: 4px; background: linear-gradient(135deg, rgba(0,240,255,0.1), rgba(180,77,255,0.1));
+        }
+        .feature-card:hover .anim-tpl-card:nth-child(1) { transform: rotate(-20deg) translateX(-48px) translateY(4px); }
+        .feature-card:hover .anim-tpl-card:nth-child(5) { transform: rotate(20deg) translateX(48px) translateY(4px); }
+
+        /* ── Anim 05: AI Rewrite — text morphing ── */
+        .anim-rewrite { padding: 20px 24px; height: 100%; display: flex; flex-direction: column; justify-content: center; gap: 12px; }
+        .anim-rw-before, .anim-rw-after {
+            font-family: var(--mono); font-size: 12px; padding: 10px 14px;
+            border-radius: 8px; line-height: 1.5;
+        }
+        .anim-rw-before {
+            background: rgba(255,45,120,0.06); border: 1px solid rgba(255,45,120,0.15);
+            color: var(--text-dim); text-decoration: line-through;
+            animation: rwFade 4s ease-in-out infinite;
+        }
+        .anim-rw-after {
+            background: rgba(0,240,255,0.06); border: 1px solid rgba(0,240,255,0.15);
+            color: var(--cyan);
+            animation: rwFade 4s 2s ease-in-out infinite;
+        }
+        .anim-rw-arrow {
+            font-family: var(--mono); font-size: 14px; color: var(--purple);
+            text-align: center; animation: rwPulse 2s ease-in-out infinite;
+        }
+        @keyframes rwFade { 0%,30% { opacity: 0.4; } 50%,80% { opacity: 1; } 100% { opacity: 0.4; } }
+        @keyframes rwPulse { 0%,100% { opacity: 0.3; } 50% { opacity: 1; } }
+
+        /* ── Anim 06: Responsive — morphing viewport frames ── */
+        .anim-resp { height: 100%; display: flex; align-items: center; justify-content: center; gap: 12px; }
+        .anim-resp-frame {
+            border: 1px solid var(--grid); border-radius: 6px;
+            background: var(--deep); position: relative;
+            transition: all 0.6s ease;
+        }
+        .anim-resp-frame::before {
+            content: ''; position: absolute; top: 4px; left: 4px; right: 4px; height: 6px;
+            border-radius: 2px; background: var(--grid);
+        }
+        .anim-resp-desktop { width: 80px; height: 56px; }
+        .anim-resp-tablet { width: 48px; height: 64px; }
+        .anim-resp-phone { width: 28px; height: 52px; }
+        .anim-resp-active { border-color: var(--cyan); box-shadow: 0 0 12px rgba(0,240,255,0.15); }
+        .anim-resp-desktop::after, .anim-resp-tablet::after, .anim-resp-phone::after {
+            content: ''; position: absolute; bottom: 6px; left: 6px; right: 6px;
+            height: 3px; border-radius: 2px; background: var(--grid);
+        }
 
         /* Tracking highlight */
         .tracking-highlight {
@@ -547,17 +723,17 @@
             </div>
             <div class="problem-grid">
                 <div class="problem-card">
-                    <div class="problem-icon">&#128553;</div>
+                    <div class="problem-num">Pain 01</div>
                     <h3>Bikin Sendiri? 3 Hari.</h3>
                     <p>Buka Canva, coba HTML, copy-paste dari sana-sini. Hasilnya? Masih jelek.</p>
                 </div>
                 <div class="problem-card">
-                    <div class="problem-icon">&#128184;</div>
+                    <div class="problem-num">Pain 02</div>
                     <h3>Hire Desainer? Rp 3-10 Juta.</h3>
                     <p>Buat satu halaman. Mau revisi? Tambah biaya. Mau halaman baru? Mulai dari nol.</p>
                 </div>
                 <div class="problem-card">
-                    <div class="problem-icon">&#128565;</div>
+                    <div class="problem-num">Pain 03</div>
                     <h3>Tool Lain? Output Generic.</h3>
                     <p>Generate LP, done. Tapi ga bisa edit. Ga ada pixel tracking. Harus pasang sendiri.</p>
                 </div>
@@ -571,36 +747,107 @@
             <div class="section-label">Fitur</div>
             <div class="section-title">Semua Yang Kamu Butuhkan. Satu Tool.</div>
             <div class="feature-grid">
+
+                <!-- 01 Multi-AI -->
                 <div class="feature-card">
-                    <img class="feature-icon-img" src="assets/icons/icon-ai-brain.png" alt="AI" loading="lazy">
-                    <h3>Multi-AI Engine</h3>
-                    <p>Pilih Claude, ChatGPT, atau Gemini. Bring your own API key — kamu yang kontrol.</p>
+                    <div class="feat-stage">
+                        <div class="anim-ai">
+                            <div class="anim-ai-node" data-ai="0">Claude</div>
+                            <div class="anim-ai-node" data-ai="1">GPT</div>
+                            <div class="anim-ai-node" data-ai="2">Gemini</div>
+                            <div class="anim-ai-arrow">&rarr;</div>
+                            <div class="anim-ai-out">LP</div>
+                        </div>
+                    </div>
+                    <div class="feat-body">
+                        <div class="feat-label">01 &mdash; ai engine</div>
+                        <div class="feat-title">3 AI provider, kamu yang pilih</div>
+                    </div>
                 </div>
+
+                <!-- 02 Inline Edit -->
                 <div class="feature-card">
-                    <img class="feature-icon-img" src="assets/icons/icon-edit-pencil.png" alt="Edit" loading="lazy">
-                    <h3>Edit Langsung di Preview</h3>
-                    <p>Klik teks, ubah. Klik tombol, ganti. Ga perlu buka code editor.</p>
+                    <div class="feat-stage">
+                        <div class="anim-edit">
+                            <div class="anim-edit-line"></div>
+                            <div class="anim-edit-line anim-edit-active"><div class="anim-edit-cursor"></div></div>
+                            <div class="anim-edit-line"></div>
+                            <div class="anim-edit-line" style="width:40%"></div>
+                        </div>
+                    </div>
+                    <div class="feat-body">
+                        <div class="feat-label">02 &mdash; inline edit</div>
+                        <div class="feat-title">Klik langsung, ubah di preview</div>
+                    </div>
                 </div>
+
+                <!-- 03 Pixel Tracking -->
                 <div class="feature-card">
-                    <img class="feature-icon-img" src="assets/icons/icon-pixel-meta.png" alt="Tracking" loading="lazy">
-                    <h3>Tracking Pixel Baked-in</h3>
-                    <p>Meta Pixel, TikTok, Google Tag — langsung ter-inject di HTML. Pilih event per tombol.</p>
+                    <div class="feat-stage">
+                        <div class="anim-pixel">
+                            <div class="anim-pixel-dot"></div>
+                            <div class="anim-pixel-dot"></div>
+                            <div class="anim-pixel-dot"></div>
+                            <div class="anim-pixel-dot"></div>
+                            <div class="anim-pixel-dot"></div>
+                            <div class="anim-pixel-node">Meta</div>
+                            <div class="anim-pixel-node">TikTok</div>
+                            <div class="anim-pixel-node">GTM</div>
+                        </div>
+                    </div>
+                    <div class="feat-body">
+                        <div class="feat-label">03 &mdash; tracking</div>
+                        <div class="feat-title">Pixel baked-in, langsung ke HTML</div>
+                    </div>
                 </div>
+
+                <!-- 04 Templates -->
                 <div class="feature-card">
-                    <img class="feature-icon-img" src="assets/icons/icon-template-card.png" alt="Templates" loading="lazy">
-                    <h3>6 Template Profesional</h3>
-                    <p>Product Launch, Sales Page, App, Lead Magnet, Course, Link in Bio.</p>
+                    <div class="feat-stage">
+                        <div class="anim-tpl">
+                            <div class="anim-tpl-card">Sales</div>
+                            <div class="anim-tpl-card">Launch</div>
+                            <div class="anim-tpl-card">App</div>
+                            <div class="anim-tpl-card">Lead</div>
+                            <div class="anim-tpl-card">Course</div>
+                        </div>
+                    </div>
+                    <div class="feat-body">
+                        <div class="feat-label">04 &mdash; templates</div>
+                        <div class="feat-title">6 layout profesional, proven convert</div>
+                    </div>
                 </div>
+
+                <!-- 05 AI Rewrite -->
                 <div class="feature-card">
-                    <img class="feature-icon-img" src="assets/icons/icon-drag-handle.png" alt="AI Rewrite" loading="lazy">
-                    <h3>AI Rewrite Per Elemen</h3>
-                    <p>Klik headline, ketik "bikin lebih urgent". AI tulis ulang cuma bagian itu.</p>
+                    <div class="feat-stage">
+                        <div class="anim-rewrite">
+                            <div class="anim-rw-before">Beli sekarang juga</div>
+                            <div class="anim-rw-arrow">&darr; AI</div>
+                            <div class="anim-rw-after">Cuma hari ini — hemat 70%</div>
+                        </div>
+                    </div>
+                    <div class="feat-body">
+                        <div class="feat-label">05 &mdash; ai rewrite</div>
+                        <div class="feat-title">Tulis ulang per elemen, context-aware</div>
+                    </div>
                 </div>
+
+                <!-- 06 Responsive -->
                 <div class="feature-card">
-                    <img class="feature-icon-img" src="assets/icons/icon-responsive.png" alt="Responsive" loading="lazy">
-                    <h3>Responsive by Default</h3>
-                    <p>Semua LP yang di-generate otomatis responsive. Desktop, tablet, HP.</p>
+                    <div class="feat-stage">
+                        <div class="anim-resp" id="anim-resp">
+                            <div class="anim-resp-frame anim-resp-desktop anim-resp-active"></div>
+                            <div class="anim-resp-frame anim-resp-tablet"></div>
+                            <div class="anim-resp-frame anim-resp-phone"></div>
+                        </div>
+                    </div>
+                    <div class="feat-body">
+                        <div class="feat-label">06 &mdash; responsive</div>
+                        <div class="feat-title">Desktop, tablet, HP — otomatis</div>
+                    </div>
                 </div>
+
             </div>
         </div>
     </section>
@@ -708,27 +955,8 @@
                 <div class="pricing-mascot">
                     <img src="assets/mascot/pidgo-rocket.png" alt="Pidge launching" loading="lazy">
                 </div>
-                <div class="pricing-card">
-                    <div class="pricing-old">Rp 1.300.000</div>
-                    <div class="pricing-amount">Rp 99.000</div>
-                    <div class="pricing-period">Sekali bayar · Lifetime · BYOK</div>
-                    <ul class="pricing-features">
-                        <li>Generate unlimited landing pages</li>
-                        <li>12 section LP structure (proven converting)</li>
-                        <li>Meta, TikTok, Google pixel injection</li>
-                        <li>Claude, ChatGPT, Gemini support</li>
-                        <li>Inline editing + AI rewrite</li>
-                        <li>Drag-and-drop sections & blocks</li>
-                        <li>Image upload</li>
-                        <li>HTML export — deploy anywhere</li>
-                    </ul>
-                    <a href="#" class="pricing-cta">Mulai Bikin LP Sekarang</a>
-                    <div class="pricing-trust">
-                        <span>&#128274; Pembayaran Aman</span>
-                        <span>&#9889; Akses Instant</span>
-                        <span>&#128273; BYOK</span>
-                    </div>
-                    <div class="pricing-urgency">&#128293; Harga launch — naik kapan saja</div>
+                <div style="max-width: 480px; margin: 0 auto;">
+                    <iframe id="myiframe" width="100%" frameborder="0" scrolling="no" src="https://qlipper.myscalev.com/pidgoapp" style="border: none; border-radius: 16px; min-height: 600px; overflow: hidden;"></iframe>
                 </div>
             </div>
         </div>
@@ -773,6 +1001,7 @@
     <!-- Scroll fade-in observer -->
     <script>
         document.addEventListener('DOMContentLoaded', function() {
+            // Fade-in on scroll
             var els = document.querySelectorAll('.fade-in');
             if ('IntersectionObserver' in window) {
                 var obs = new IntersectionObserver(function(entries) {
@@ -786,6 +1015,48 @@
                 els.forEach(function(el) { obs.observe(el); });
             } else {
                 els.forEach(function(el) { el.classList.add('visible'); });
+            }
+
+            // Feature Anim 01: cycle active AI provider
+            var aiNodes = document.querySelectorAll('.anim-ai-node');
+            var aiIdx = 0;
+            setInterval(function() {
+                aiNodes.forEach(function(n) { n.classList.remove('active'); });
+                aiNodes[aiIdx].classList.add('active');
+                aiIdx = (aiIdx + 1) % aiNodes.length;
+            }, 1200);
+
+            // Feature Anim 06: cycle responsive frame
+            var respFrames = document.querySelectorAll('.anim-resp-frame');
+            var respIdx = 0;
+            setInterval(function() {
+                respFrames.forEach(function(f) { f.classList.remove('anim-resp-active'); });
+                respFrames[respIdx].classList.add('anim-resp-active');
+                respIdx = (respIdx + 1) % respFrames.length;
+            }, 1800);
+
+            // Scalev iframe resize + redirect
+            var iframe = document.getElementById('myiframe');
+            if (iframe) {
+                function resizeIframe(height) { iframe.style.height = height + 'px'; }
+                function isUrl(string) { try { new URL(string); return true; } catch (_) { return false; } }
+                function isJSONObject(string) { try { var parsed = JSON.parse(string); return typeof parsed === 'object' && parsed !== null; } catch (e) { return false; } }
+                function isIframeSameOrigin() { try { var doc = iframe.contentDocument || iframe.contentWindow.document; return true; } catch (e) { return false; } }
+                window.addEventListener('message', function(e) {
+                    if (e.origin === 'https://qlipper.myscalev.com') {
+                        if (isUrl(e.data)) { location.href = e.data; }
+                        if (isJSONObject(e.data) && !isIframeSameOrigin()) {
+                            var message = JSON.parse(e.data);
+                            if (message.type === 'resize') { resizeIframe(message.height); }
+                        }
+                    }
+                }, false);
+                var iframeObserver = new IntersectionObserver(function(entries) {
+                    entries.forEach(function(entry) {
+                        if (entry.isIntersecting) { iframe.src = iframe.src; iframeObserver.disconnect(); }
+                    });
+                });
+                iframeObserver.observe(iframe);
             }
         });
     </script>
