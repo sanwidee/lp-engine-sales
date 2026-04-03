@@ -312,30 +312,48 @@
             font-family: var(--mono); font-size: 10px; color: var(--purple);
         }
 
-        /* ── Anim 02: Inline edit — cursor clicking and text changing ── */
-        .anim-edit { padding: 24px; height: 100%; display: flex; flex-direction: column; justify-content: center; gap: 10px; }
-        .anim-edit-line {
-            height: 12px; border-radius: 4px; background: var(--grid);
+        /* ── Anim 02: Inline edit — click, select, replace text ── */
+        .anim-edit { padding: 20px; height: 100%; display: flex; flex-direction: column; justify-content: center; gap: 6px; font-family: var(--mono); font-size: 11px; color: var(--text-dim); }
+        .anim-edit-row { display: flex; align-items: center; gap: 0; line-height: 1.8; white-space: nowrap; }
+        .anim-edit-static { opacity: 0.4; }
+        .anim-edit-target {
+            position: relative; display: inline-block;
+            padding: 1px 4px; border-radius: 3px;
+            transition: all 0.3s;
         }
-        .anim-edit-line:nth-child(1) { width: 70%; }
-        .anim-edit-line:nth-child(2) { width: 90%; }
-        .anim-edit-line:nth-child(3) { width: 50%; }
-        .anim-edit-active {
-            background: transparent; border: 1px solid var(--cyan);
-            position: relative; overflow: hidden;
+        .anim-edit-target.selecting {
+            background: rgba(0,240,255,0.15);
+            box-shadow: 0 0 0 1px var(--cyan);
         }
-        .anim-edit-active::before {
-            content: '';
-            position: absolute; left: 0; top: 0; height: 100%;
-            width: 0; background: rgba(0,240,255,0.15);
-            animation: editHighlight 3s ease-in-out infinite;
+        .anim-edit-target.deleting span {
+            opacity: 0; transition: opacity 0.15s;
+        }
+        .anim-edit-target.typing {
+            background: rgba(0,240,255,0.08);
+            box-shadow: 0 0 0 1px rgba(0,240,255,0.4);
+            color: var(--cyan);
         }
         .anim-edit-cursor {
-            position: absolute; right: 8px; top: 50%; transform: translateY(-50%);
-            width: 1px; height: 10px; background: var(--cyan);
-            animation: blink 0.8s step-end infinite;
+            display: inline-block; width: 1px; height: 12px;
+            background: var(--cyan); vertical-align: middle; margin-left: 1px;
+            animation: blink 0.6s step-end infinite;
         }
-        @keyframes editHighlight { 0%,100% { width: 0; } 40%,60% { width: 100%; } }
+        .anim-edit-pointer {
+            position: absolute; width: 14px; height: 14px;
+            opacity: 0; transition: opacity 0.3s, transform 0.5s cubic-bezier(0.4,0,0.2,1);
+            pointer-events: none; z-index: 5;
+        }
+        .anim-edit-pointer svg { width: 14px; height: 14px; filter: drop-shadow(0 1px 3px rgba(0,0,0,0.5)); }
+        .anim-edit-pointer.visible { opacity: 1; }
+        .anim-edit-toolbar {
+            display: flex; gap: 4px; margin-top: 4px; opacity: 0; transition: opacity 0.3s; transform: translateY(-2px);
+        }
+        .anim-edit-toolbar.visible { opacity: 1; transform: translateY(0); }
+        .anim-edit-toolbar span {
+            font-size: 8px; padding: 3px 8px; border-radius: 4px;
+            background: var(--purple); color: #fff; letter-spacing: 0.04em;
+        }
+        .anim-edit-toolbar span:nth-child(2) { background: var(--cyan); color: var(--deep); }
         @keyframes blink { 0%,100% { opacity: 1; } 50% { opacity: 0; } }
 
         /* ── Anim 03: Pixel tracking — data flowing into pixel nodes ── */
@@ -448,6 +466,8 @@
         .tracking-mascot img {
             max-width: 320px; width: 100%; height: auto;
             filter: drop-shadow(0 0 40px rgba(0,240,255,0.2));
+            mask-image: radial-gradient(ellipse 70% 65% at center, #000 50%, transparent 100%);
+            -webkit-mask-image: radial-gradient(ellipse 70% 65% at center, #000 50%, transparent 100%);
         }
         .tracking-highlight h2 {
             font-family: var(--heading); font-size: 28px; margin-bottom: 16px;
@@ -614,10 +634,10 @@
         }
         .sticky-cta a {
             display: block; width: 100%; font-family: var(--mono); font-size: 13px;
-            padding: 14px; background: linear-gradient(135deg, var(--purple), var(--cyan)); color: #fff;
+            padding: 14px; background: linear-gradient(135deg, #0891b2, #0e7490); color: #fff;
             border-radius: 8px; font-weight: 600; text-transform: uppercase;
             letter-spacing: 0.05em; text-decoration: none; text-align: center;
-            box-shadow: 0 0 20px rgba(180,77,255,0.4);
+            box-shadow: 0 0 20px rgba(14,116,144,0.5); text-shadow: 0 1px 2px rgba(0,0,0,0.2);
         }
 
         /* Brand decorative elements */
@@ -783,11 +803,12 @@
                 <!-- 02 Inline Edit -->
                 <div class="feature-card">
                     <div class="feat-stage">
-                        <div class="anim-edit">
-                            <div class="anim-edit-line"></div>
-                            <div class="anim-edit-line anim-edit-active"><div class="anim-edit-cursor"></div></div>
-                            <div class="anim-edit-line"></div>
-                            <div class="anim-edit-line" style="width:40%"></div>
+                        <div class="anim-edit" id="animEdit">
+                            <div class="anim-edit-row"><span class="anim-edit-static">&lt;h1&gt;</span><span class="anim-edit-target" id="editTarget"><span>Jualan Online</span></span><span class="anim-edit-static">&lt;/h1&gt;</span></div>
+                            <div class="anim-edit-row"><span class="anim-edit-static">&lt;p&gt;Mulai bisnis dari rumah&lt;/p&gt;</span></div>
+                            <div class="anim-edit-row"><span class="anim-edit-static">&lt;button&gt;Beli Sekarang&lt;/button&gt;</span></div>
+                            <div class="anim-edit-toolbar" id="editToolbar"><span>AI Rewrite</span><span>Apply</span></div>
+                            <div class="anim-edit-pointer" id="editPointer"><svg viewBox="0 0 24 24"><path d="M4 1L4 19L8.5 14.5L12.5 22L15 21L11 13L17 13Z" fill="white" stroke="rgba(0,0,0,0.3)" stroke-width="1"/></svg></div>
                         </div>
                     </div>
                     <div class="feat-body">
@@ -973,7 +994,7 @@
                     <img src="assets/mascot/pidgo-rocket.webp" alt="Pidge launching" loading="lazy">
                 </div>
                 <div style="max-width: 480px; margin: 0 auto;">
-                    <iframe id="myiframe" width="100%" frameborder="0" src="https://weedlabs.myscalev.com/pidgoapp"></iframe>
+                    <iframe id="myiframe" width="100%" frameborder="0" style="background:#fff;border-radius:12px;" src="https://weedlabs.myscalev.com/pidgoapp"></iframe>
                 </div>
             </div>
         </div>
@@ -1011,8 +1032,8 @@
     </footer>
 
     <!-- Sticky mobile CTA -->
-    <div class="sticky-cta">
-        <a href="#pricing">Coba Sekarang — Rp 99.000</a>
+    <div class="sticky-cta" id="stickyCta">
+        <a href="https://weedlabs.myscalev.com/pidgoapp?utm_source=pidgoapp&utm_medium=stickybutton&utm_campaign=landing">Coba Sekarang — Rp 99.000</a>
     </div>
 
     <!-- Scroll fade-in observer -->
@@ -1034,6 +1055,59 @@
                 els.forEach(function(el) { el.classList.add('visible'); });
             }
 
+            // Feature Anim 02: Inline edit — click, select, replace
+            (function() {
+                var target = document.getElementById('editTarget');
+                var pointer = document.getElementById('editPointer');
+                var toolbar = document.getElementById('editToolbar');
+                if (!target || !pointer) return;
+
+                var words = ['Jualan Online', 'Grow Your Brand', 'Scale Bisnismu', 'Launch Today'];
+                var idx = 0;
+
+                function typeText(el, text, cb) {
+                    var i = 0;
+                    el.innerHTML = '<span class="anim-edit-cursor"></span>';
+                    var iv = setInterval(function() {
+                        if (i < text.length) {
+                            el.innerHTML = text.slice(0, i + 1) + '<span class="anim-edit-cursor"></span>';
+                            i++;
+                        } else {
+                            clearInterval(iv);
+                            setTimeout(cb, 600);
+                        }
+                    }, 60);
+                }
+
+                function runCycle() {
+                    var next = words[(idx + 1) % words.length];
+                    // 1. Move pointer to target
+                    pointer.style.transform = 'translate(20px, 8px)';
+                    pointer.classList.add('visible');
+                    setTimeout(function() {
+                        // 2. Click — select text
+                        target.classList.add('selecting');
+                        toolbar.classList.add('visible');
+                        setTimeout(function() {
+                            // 3. Delete old text
+                            target.classList.remove('selecting');
+                            target.classList.add('typing');
+                            toolbar.classList.remove('visible');
+                            pointer.classList.remove('visible');
+                            // 4. Type new text
+                            typeText(target, next, function() {
+                                target.classList.remove('typing');
+                                target.innerHTML = '<span>' + next + '</span>';
+                                idx = (idx + 1) % words.length;
+                                setTimeout(runCycle, 1500);
+                            });
+                        }, 1000);
+                    }, 600);
+                }
+
+                setTimeout(runCycle, 1000);
+            })();
+
             // Feature Anim 01: cycle active AI provider
             var aiNodes = document.querySelectorAll('.anim-ai-node');
             var aiIdx = 0;
@@ -1051,6 +1125,18 @@
                 respFrames[respIdx].classList.add('anim-resp-active');
                 respIdx = (respIdx + 1) % respFrames.length;
             }, 1800);
+
+            // Hide sticky CTA when pricing section is visible
+            var stickyCta = document.getElementById('stickyCta');
+            var pricingSection = document.getElementById('pricing');
+            if (stickyCta && pricingSection) {
+                var ctaObs = new IntersectionObserver(function(entries) {
+                    entries.forEach(function(e) {
+                        stickyCta.style.display = e.isIntersecting ? 'none' : '';
+                    });
+                }, { threshold: 0.1 });
+                ctaObs.observe(pricingSection);
+            }
 
             // Scalev iframe resize + redirect
             var iframe = document.getElementById('myiframe');
