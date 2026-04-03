@@ -185,33 +185,23 @@
 
         /* Speed demo */
         .demo-wrapper {
-            display: flex; align-items: center; gap: 32px; max-width: 800px; margin: 0 auto;
+            max-width: 900px; margin: 0 auto;
         }
-        .demo-mascot { flex-shrink: 0; }
-        .demo-mascot img {
-            width: 180px; height: auto;
-            filter: drop-shadow(0 0 20px rgba(255,45,120,0.2));
+        .demo-grid {
+            display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 24px;
         }
-        .demo-frame {
-            flex: 1;
-            background: var(--deep); border: 1px solid var(--grid); border-radius: 16px;
-            padding: 4px;
-            box-shadow: 0 0 40px rgba(180,77,255,0.1);
+        .demo-grid img {
+            width: 100%; border-radius: 12px; border: 1px solid var(--grid);
+            box-shadow: 0 4px 24px rgba(0,0,0,0.3);
+            transition: transform 0.3s, box-shadow 0.3s;
         }
-        .demo-frame-bar {
-            display: flex; align-items: center; gap: 6px; padding: 10px 16px;
-            border-bottom: 1px solid var(--grid);
+        .demo-grid img:hover {
+            transform: translateY(-4px); box-shadow: 0 8px 32px rgba(167,139,250,0.2);
         }
-        .demo-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--grid); }
-        .demo-url { font-family: var(--mono); font-size: 11px; color: var(--text-dim); margin-left: 12px; }
-        .demo-content {
-            background: var(--void); border-radius: 0 0 12px 12px;
-            padding: 24px; display: flex; flex-direction: column; align-items: center; justify-content: center;
-            min-height: 280px;
-        }
-        .demo-content img {
-            max-width: 200px; margin-bottom: 16px;
-            filter: drop-shadow(0 0 16px rgba(0,240,255,0.2));
+        .demo-grid img.zoomed {
+            position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%) scale(1);
+            max-width: 95vw; max-height: 90vh; z-index: 9999; border-radius: 12px;
+            box-shadow: 0 0 0 9999px rgba(0,0,0,0.8); cursor: zoom-out; object-fit: contain;
         }
         .demo-caption {
             font-family: var(--mono); font-size: 13px; color: var(--text-dim);
@@ -671,8 +661,7 @@
             .tracking-badges { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
             .tracking-badge { padding: 8px 12px; font-size: 11px; justify-content: center; }
             .tracking-badge img { width: 22px; height: 22px; }
-            .demo-wrapper { flex-direction: column; }
-            .demo-mascot img { width: 120px; }
+            .demo-grid { grid-template-columns: 1fr; }
             .pricing-mascot { display: none; }
             .sticky-cta { display: block; }
             body { padding-bottom: 72px; }
@@ -706,7 +695,7 @@
                     </div>
                 </div>
                 <div class="hero-mascot" style="position:relative;">
-                    <img src="assets/mascot/pidgo-hero.webp" alt="Pidge showing a landing page" loading="eager">
+                    <img src="assets/mascot/pidgo-hero.webp" alt="Pidgo showing a landing page" loading="eager">
                     <img src="assets/brand/sparkles.webp" class="sparkle-decor" style="top:-20px;right:-10px;" loading="lazy">
                 </div>
             </div>
@@ -727,21 +716,15 @@
             <div class="section-label">Lihat Cara Kerjanya</div>
             <div class="section-title">Form &rarr; AI &rarr; Landing Page. Done.</div>
             <div class="demo-wrapper">
-                <div class="demo-mascot">
-                    <img src="assets/mascot/pidgo-typing.webp" alt="Pidge typing on laptop" loading="lazy">
+                <div class="demo-grid">
+                    <img src="assets/brand/app-editor.jpg" alt="Pidgo editor — sidebar + preview" loading="lazy" onclick="this.classList.toggle('zoomed')">
+                    <img src="assets/brand/app-tracking.jpg" alt="Pidgo tracking pixel setup" loading="lazy" onclick="this.classList.toggle('zoomed')">
+                    <img src="assets/brand/app-rewrite.jpg" alt="Pidgo AI rewrite feature" loading="lazy" onclick="this.classList.toggle('zoomed')">
+                    <img src="assets/brand/app-chat.jpg" alt="Pidgo chat mode" loading="lazy" onclick="this.classList.toggle('zoomed')">
                 </div>
-                <div class="demo-frame">
-                    <div class="demo-frame-bar">
-                        <div class="demo-dot"></div><div class="demo-dot"></div><div class="demo-dot"></div>
-                        <span class="demo-url">pidgoapp.online/generator</span>
-                    </div>
-                    <div class="demo-content">
-                        <img src="assets/brand/browser-hero.webp" alt="LP Engine browser preview" loading="lazy">
-                        <div class="demo-caption">
-                            <span>Pidge</span> lagi bikinin LP kamu...<br>
-                            Isi form &rarr; Generate &rarr; Edit &rarr; Export. Selesai.
-                        </div>
-                    </div>
+                <div class="demo-caption">
+                    <span>Pidgo</span> lagi bikinin LP kamu...<br>
+                    Isi form &rarr; Generate &rarr; Edit &rarr; Export. Selesai.
                 </div>
             </div>
         </div>
@@ -895,7 +878,7 @@
                 <div class="section-label">Diferensiator #1</div>
                 <h2>Tool lain bikin LP. <span>Pidgoapp pasangin pixel-nya.</span></h2>
                 <div class="tracking-mascot" style="position:relative;">
-                    <img src="assets/mascot/pidgo-wiring.webp" alt="Pidge connecting tracking pixels to landing page" loading="lazy">
+                    <img src="assets/mascot/pidgo-wiring.webp" alt="Pidgo connecting tracking pixels to landing page" loading="lazy">
                     <img src="assets/brand/sparkles.webp" class="sparkle-decor" style="top:-15px;left:-20px;animation-delay:1s;" loading="lazy">
                 </div>
                 <p>Kamu habis Rp 500K/hari buat Meta Ads tapi LP-mu ga ada pixel? Data hilang. Konversi ga ke-track. Pidgoapp solve ini dari awal.</p>
@@ -991,7 +974,7 @@
 
             <div class="pricing-wrapper">
                 <div class="pricing-mascot">
-                    <img src="assets/mascot/pidgo-rocket.webp" alt="Pidge launching" loading="lazy">
+                    <img src="assets/mascot/pidgo-rocket.webp" alt="Pidgo launching" loading="lazy">
                 </div>
                 <div style="max-width: 480px; margin: 0 auto;">
                     <iframe id="myiframe" width="100%" frameborder="0" style="background:#fff;border-radius:12px;" src="https://weedlabs.myscalev.com/pidgoapp"></iframe>
@@ -1020,7 +1003,7 @@
     <footer class="footer grid-bg">
         <div class="container">
             <div class="footer-mascot">
-                <img src="assets/mascot/pidgo-base.webp" alt="Pidge" loading="lazy">
+                <img src="assets/mascot/pidgo-base.webp" alt="Pidgo" loading="lazy">
             </div>
             <div class="footer-links">
                 <a href="https://weedlabs.online">weedlabs.online</a>
