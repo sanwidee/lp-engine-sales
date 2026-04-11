@@ -3,12 +3,29 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pidgoapp — Bikin Landing Page Profesional dalam 3 Menit</title>
-    <meta name="description" content="AI landing page generator dengan tracking pixel baked-in. Bikin LP profesional dalam 3 menit, langsung siap iklan.">
+    <title>Pidgoapp - Bikin Web Profesional, Tanpa Coding</title>
+    <meta name="description" content="Bikin web profesional tanpa coding. AI generate, edit langsung di preview, tracking pixel otomatis, widget siap pakai. Sekali bayar, selamanya milik kamu.">
     <link rel="icon" type="image/png" href="assets/favicon.png">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <!-- Meta Pixel Code -->
+    <script>
+    !function(f,b,e,v,n,t,s)
+    {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+    n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+    if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+    n.queue=[];t=b.createElement(e);t.async=!0;
+    t.src=v;s=b.getElementsByTagName(e)[0];
+    s.parentNode.insertBefore(t,s)}(window, document,'script',
+    'https://connect.facebook.net/en_US/fbevents.js');
+    fbq('init', '962374310069715');
+    fbq('track', 'PageView');
+    </script>
+    <noscript><img height="1" width="1" style="display:none"
+    src="https://www.facebook.com/tr?id=962374310069715&ev=PageView&noscript=1"
+    /></noscript>
+    <!-- End Meta Pixel Code -->
     <style>
         *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 
@@ -94,6 +111,11 @@
             transition: all 0.3s;
         }
         .nav-cta:hover { transform: scale(1.05); box-shadow: 0 0 30px rgba(180,77,255,0.5); }
+
+        /* Typewriter */
+        .tw-cursor { display: inline-block; width: 3px; height: 1em; background: var(--purple); margin-left: 4px; vertical-align: text-bottom; animation: blink .7s step-end infinite; }
+        @keyframes blink { 50% { opacity: 0; } }
+        .tw-word { color: var(--purple); display: inline; }
 
         /* Hero */
         .hero {
@@ -185,27 +207,43 @@
 
         /* Speed demo */
         .demo-wrapper {
-            max-width: 900px; margin: 0 auto;
+            max-width: 800px; margin: 0 auto;
         }
-        .demo-grid {
-            display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 24px;
+        .demo-frame {
+            background: var(--deep); border: 1px solid var(--grid); border-radius: 16px;
+            padding: 4px; padding-bottom: 0; box-shadow: 0 0 40px rgba(180,77,255,0.1);
+            overflow: hidden;
         }
-        .demo-grid img {
-            width: 100%; border-radius: 12px; border: 1px solid var(--grid);
-            box-shadow: 0 4px 24px rgba(0,0,0,0.3);
-            transition: transform 0.3s, box-shadow 0.3s;
+        .demo-frame-bar {
+            display: flex; align-items: center; gap: 6px; padding: 10px 16px;
+            border-bottom: 1px solid var(--grid);
         }
-        .demo-grid img:hover {
-            transform: translateY(-4px); box-shadow: 0 8px 32px rgba(167,139,250,0.2);
+        .demo-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--grid); }
+        .demo-url { font-family: var(--mono); font-size: 11px; color: var(--text-dim); margin-left: 12px; }
+        .demo-carousel {
+            position: relative; background: var(--void); border-radius: 0 0 12px 12px;
+            overflow: hidden; min-height: 280px;
         }
-        .demo-grid img.zoomed {
-            position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%) scale(1);
-            max-width: 95vw; max-height: 90vh; z-index: 9999; border-radius: 12px;
-            box-shadow: 0 0 0 9999px rgba(0,0,0,0.8); cursor: zoom-out; object-fit: contain;
+        .demo-carousel img {
+            width: 100%; display: none; border-radius: 0 0 12px 12px;
+        }
+        .demo-carousel img.active { display: block; animation: fadeIn 0.4s ease; }
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+        .demo-nav {
+            display: flex; justify-content: center; gap: 8px; padding: 12px 0 8px;
+        }
+        .demo-nav button {
+            width: 8px; height: 8px; border-radius: 50%; border: none;
+            background: var(--grid); cursor: pointer; transition: all 0.2s; padding: 0;
+        }
+        .demo-nav button.active { background: var(--purple); width: 24px; border-radius: 4px; }
+        .demo-labels {
+            text-align: center; font-family: var(--mono); font-size: 11px;
+            color: var(--purple); padding: 0 0 12px; letter-spacing: 1px; text-transform: uppercase;
         }
         .demo-caption {
             font-family: var(--mono); font-size: 13px; color: var(--text-dim);
-            text-align: center;
+            text-align: center; margin-top: 16px;
         }
         .demo-caption span { color: var(--pink); }
 
@@ -442,6 +480,19 @@
             height: 3px; border-radius: 2px; background: var(--grid);
         }
 
+        /* Widget animation */
+        .anim-widget { display: flex; flex-direction: column; gap: 6px; align-items: center; }
+        .anim-widget-item {
+            font-family: var(--mono); font-size: 11px; font-weight: 600;
+            color: var(--text-dim); background: var(--deep); border: 1px solid var(--grid);
+            padding: 6px 14px; border-radius: 8px;
+            animation: widget-pop 3s ease-in-out infinite;
+        }
+        @keyframes widget-pop {
+            0%, 100% { opacity: 0.4; transform: scale(0.95); }
+            50% { opacity: 1; transform: scale(1); border-color: var(--purple); color: var(--purple); }
+        }
+
         /* Tracking highlight */
         .tracking-highlight {
             padding: 80px 0;
@@ -661,7 +712,7 @@
             .tracking-badges { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
             .tracking-badge { padding: 8px 12px; font-size: 11px; justify-content: center; }
             .tracking-badge img { width: 22px; height: 22px; }
-            .demo-grid { grid-template-columns: 1fr; }
+            .demo-frame { border-radius: 12px; }
             .pricing-mascot { display: none; }
             .sticky-cta { display: block; }
             body { padding-bottom: 72px; }
@@ -687,9 +738,9 @@
             <div class="hero-inner">
                 <div class="hero-text">
                     <div class="hero-badge">AI Landing Page Generator</div>
-                    <h1>Bikin Landing Page Profesional dalam 3 Menit</h1>
-                    <p>Isi form singkat, AI generate LP lengkap — copywriting, desain, tracking pixel. Langsung siap iklan.</p>
-                    <a href="#pricing" class="hero-cta">Coba Sekarang — Rp 99.000</a>
+                    <h1>Bikin Web Profesional<br><span class="tw-word" id="tw-target"></span><span class="tw-cursor"></span></h1>
+                    <p>Landing page lengkap dengan copywriting, desain, dan tracking pixel. Generate, edit langsung di preview, pasang widget, export. Siap iklan.</p>
+                    <a href="#pricing" class="hero-cta">Coba Sekarang — Rp 149.000</a>
                     <div class="hero-sub">
                         <span>&#9889;</span> Sekali bayar, lifetime · <span>&#128273;</span> Bring Your Own AI Key · <span>&#128202;</span> Pixel langsung masuk
                     </div>
@@ -705,26 +756,36 @@
     <!-- Ticker -->
     <div class="ticker">
         <div class="ticker-inner">
-            <span>&#128293; 500+ LP dibuat</span> · <span>&#9889; 3 menit generate</span> · <span>&#128202; Meta Pixel baked-in</span> · <span>&#129302; Claude + GPT + Gemini</span> · <span>&#128176; Rp 99K sekali bayar</span> · <span>&#127470;&#127465; Buatan Indonesia</span> ·
-            <span>&#128293; 500+ LP dibuat</span> · <span>&#9889; 3 menit generate</span> · <span>&#128202; Meta Pixel baked-in</span> · <span>&#129302; Claude + GPT + Gemini</span> · <span>&#128176; Rp 99K sekali bayar</span> · <span>&#127470;&#127465; Buatan Indonesia</span> ·
+            <span>&#128293; 500+ LP dibuat</span> · <span>&#9889; 3 menit generate</span> · <span>&#128202; Meta Pixel baked-in</span> · <span>&#129302; Claude + GPT + Gemini</span> · <span>&#128176; Rp 149K sekali bayar</span> · <span>&#127470;&#127465; Buatan Indonesia</span> ·
+            <span>&#128293; 500+ LP dibuat</span> · <span>&#9889; 3 menit generate</span> · <span>&#128202; Meta Pixel baked-in</span> · <span>&#129302; Claude + GPT + Gemini</span> · <span>&#128176; Rp 149K sekali bayar</span> · <span>&#127470;&#127465; Buatan Indonesia</span> ·
         </div>
     </div>
 
     <!-- Speed Demo -->
     <section class="section fade-in">
         <div class="container">
-            <div class="section-label">Lihat Cara Kerjanya</div>
-            <div class="section-title">Form &rarr; AI &rarr; Landing Page. Done.</div>
+            <div class="section-label">Bukan Cuma AI Generator</div>
+            <div class="section-title">Tool lain jual prompt. Pidgo kasih apps-nya.</div>
             <div class="demo-wrapper">
-                <div class="demo-grid">
-                    <img src="assets/brand/app-editor.jpg" alt="Pidgo editor — sidebar + preview" loading="lazy" onclick="this.classList.toggle('zoomed')">
-                    <img src="assets/brand/app-tracking.jpg" alt="Pidgo tracking pixel setup" loading="lazy" onclick="this.classList.toggle('zoomed')">
-                    <img src="assets/brand/app-rewrite.jpg" alt="Pidgo AI rewrite feature" loading="lazy" onclick="this.classList.toggle('zoomed')">
-                    <img src="assets/brand/app-chat.jpg" alt="Pidgo chat mode" loading="lazy" onclick="this.classList.toggle('zoomed')">
+                <div class="demo-frame">
+                    <div class="demo-frame-bar">
+                        <div class="demo-dot"></div><div class="demo-dot"></div><div class="demo-dot"></div>
+                        <span class="demo-url">studio.pidgoapp.online/generator</span>
+                    </div>
+                    <div class="demo-carousel" id="demoCarousel">
+                        <img src="assets/brand/app-editor.jpg" alt="Pidgo editor — sidebar + preview" loading="lazy" class="active" data-label="Editor">
+                        <img src="assets/brand/app-tracking.jpg" alt="Pidgo tracking pixel setup" loading="lazy" data-label="Tracking">
+                        <img src="assets/brand/app-rewrite.jpg" alt="Pidgo AI rewrite feature" loading="lazy" data-label="AI Rewrite">
+                        <img src="assets/brand/app-chat.jpg" alt="Pidgo chat mode" loading="lazy" data-label="Chat Mode">
+                    </div>
                 </div>
+                <div class="demo-nav" id="demoNav"></div>
+                <div class="demo-labels" id="demoLabel">Editor</div>
                 <div class="demo-caption">
-                    <span>Pidgo</span> lagi bikinin LP kamu...<br>
-                    Isi form &rarr; Generate &rarr; Edit &rarr; Export. Selesai.
+                    Editor lengkap, bukan canvas kosong. Generate, edit di preview, pasang pixel, tambah widget, export HTML.
+                </div>
+                <div style="text-align:center;margin-top:16px;">
+                    <a href="https://demo.pidgoapp.online" target="_blank" rel="noopener noreferrer" style="font-family:var(--mono);font-size:13px;color:var(--purple);text-decoration:none;border-bottom:1px dashed var(--purple);padding-bottom:2px;">Lihat demo Pidgo &rarr;</a>
                 </div>
             </div>
         </div>
@@ -867,6 +928,22 @@
                     </div>
                 </div>
 
+                <!-- 07 Widgets -->
+                <div class="feature-card">
+                    <div class="feat-stage">
+                        <div class="anim-widget">
+                            <div class="anim-widget-item" style="animation-delay:0s">&#128172; Chat</div>
+                            <div class="anim-widget-item" style="animation-delay:0.5s">&#128176; Sales Alert</div>
+                            <div class="anim-widget-item" style="animation-delay:1s">&#9200; Countdown</div>
+                            <div class="anim-widget-item" style="animation-delay:1.5s">&#128640; CTA Float</div>
+                        </div>
+                    </div>
+                    <div class="feat-body">
+                        <div class="feat-label">07 &mdash; widgets</div>
+                        <div class="feat-title">Overlay components siap pakai</div>
+                    </div>
+                </div>
+
             </div>
         </div>
     </section>
@@ -918,7 +995,7 @@
                     <th>Tool Lain</th>
                     <th class="ours">Pidgoapp</th>
                 </tr>
-                <tr><td>Harga</td><td>Gratis (+ waktu)</td><td>Rp 3-10 Juta</td><td>Rp 145.000</td><td>Rp 99.000</td></tr>
+                <tr><td>Harga</td><td>Gratis (+ waktu)</td><td>Rp 3-10 Juta</td><td>Rp 145.000</td><td>Rp 149.000</td></tr>
                 <tr><td>Waktu</td><td>3-7 hari</td><td>1-2 minggu</td><td>5 menit</td><td>3 menit</td></tr>
                 <tr><td>Edit di Preview</td><td>&#10060;</td><td>&#10060; (revisi manual)</td><td>&#10060;</td><td>&#10003;</td></tr>
                 <tr><td>Tracking Pixel</td><td>Pasang sendiri</td><td>Minta desainer</td><td>&#10060;</td><td>&#10003; Otomatis</td></tr>
@@ -960,6 +1037,11 @@
             <div class="section-label">Harga</div>
             <div class="section-title">Satu Harga. Selamanya.</div>
 
+            <div style="text-align:center; margin: 32px 0 40px;">
+                <div style="font-family: var(--mono); font-size: 42px; font-weight: 800; color: var(--purple); letter-spacing: -0.03em;">Rp 149.000</div>
+                <div style="font-size: 13px; color: var(--text-dim);">Sekali bayar, akses selamanya</div>
+            </div>
+
             <!-- Offer Stack -->
             <div style="max-width: 480px; margin: 0 auto 32px;">
                 <div class="offer-item"><span class="check">&#10003;</span><span class="name">Pidgoapp — Lifetime Access</span><span class="value">Rp 500.000</span></div>
@@ -994,7 +1076,6 @@
                 <details class="faq-item"><summary>Bisa dipake di Scalev? <span></span></summary><p>Bisa. Pidgoapp output clean HTML yang compatible dengan Scalev, Lynk.id, WordPress, Shopify, atau deploy sendiri di hosting manapun.</p></details>
                 <details class="faq-item"><summary>Pixel tracking itu apa? <span></span></summary><p>Kode kecil yang nge-track siapa yang visit, klik, dan beli di LP kamu. Penting banget kalau kamu jalanin iklan Meta/TikTok. Pidgoapp inject pixel-nya otomatis ke HTML — kamu tinggal masukkan ID.</p></details>
                 <details class="faq-item"><summary>Bedanya sama tool LP lain? <span></span></summary><p>Tool lain generate LP, done. Pidgoapp generate LP + bisa edit langsung di preview + tracking pixel langsung baked-in + support 3 AI provider + drag-and-drop. Dan lebih murah.</p></details>
-                <details class="faq-item"><summary>Kalau ga cocok gimana? <span></span></summary><p>Garansi 7 hari uang kembali. No questions asked.</p></details>
             </div>
         </div>
     </section>
@@ -1016,7 +1097,7 @@
 
     <!-- Sticky mobile CTA -->
     <div class="sticky-cta" id="stickyCta">
-        <a href="https://weedlabs.myscalev.com/pidgoapp?utm_source=pidgoapp&utm_medium=stickybutton&utm_campaign=landing">Coba Sekarang — Rp 99.000</a>
+        <a href="https://weedlabs.myscalev.com/pidgoapp?utm_source=pidgoapp&utm_medium=stickybutton&utm_campaign=landing">Coba Sekarang — Rp 149.000</a>
     </div>
 
     <!-- Scroll fade-in observer -->
@@ -1145,6 +1226,75 @@
                 iframeObserver.observe(iframe);
             }
         });
+    </script>
+    <script>
+        (function() {
+            var carousel = document.getElementById('demoCarousel');
+            var nav = document.getElementById('demoNav');
+            var label = document.getElementById('demoLabel');
+            if (!carousel || !nav) return;
+            var imgs = carousel.querySelectorAll('img');
+            var current = 0;
+            var timer;
+
+            imgs.forEach(function(_, i) {
+                var btn = document.createElement('button');
+                if (i === 0) btn.classList.add('active');
+                btn.addEventListener('click', function() { goTo(i); resetTimer(); });
+                nav.appendChild(btn);
+            });
+
+            function goTo(i) {
+                imgs[current].classList.remove('active');
+                nav.children[current].classList.remove('active');
+                current = i;
+                imgs[current].classList.add('active');
+                nav.children[current].classList.add('active');
+                label.textContent = imgs[current].dataset.label;
+            }
+
+            function resetTimer() {
+                clearInterval(timer);
+                timer = setInterval(function() { goTo((current + 1) % imgs.length); }, 4000);
+            }
+            resetTimer();
+
+            // Swipe support
+            var startX = 0;
+            var startY = 0;
+            carousel.addEventListener('touchstart', function(e) {
+                startX = e.touches[0].clientX;
+                startY = e.touches[0].clientY;
+            }, { passive: true });
+            carousel.addEventListener('touchend', function(e) {
+                var dx = e.changedTouches[0].clientX - startX;
+                var dy = e.changedTouches[0].clientY - startY;
+                if (Math.abs(dx) < 40 || Math.abs(dy) > Math.abs(dx)) return;
+                if (dx < 0) goTo((current + 1) % imgs.length);
+                else goTo((current - 1 + imgs.length) % imgs.length);
+                resetTimer();
+            }, { passive: true });
+        })();
+    </script>
+    <script>
+        (function() {
+            var words = ['Semudah Chatting', 'Tinggal Isi Form', 'Dibantuin AI', 'Tanpa Coding', 'Langsung Siap Iklan', 'Sekali Bayar'];
+            var el = document.getElementById('tw-target');
+            if (!el) return;
+            var wordIdx = 0, charIdx = 0, deleting = false;
+            function tick() {
+                var current = words[wordIdx];
+                if (!deleting) {
+                    el.textContent = current.slice(0, ++charIdx);
+                    if (charIdx === current.length) { deleting = true; return setTimeout(tick, 2000); }
+                    return setTimeout(tick, 100);
+                }
+                el.textContent = current.slice(0, --charIdx);
+                if (charIdx === 0) { deleting = false; wordIdx = (wordIdx + 1) % words.length; return setTimeout(tick, 400); }
+                setTimeout(tick, 60);
+            }
+            setTimeout(tick, 600);
+        })();
     </script>
 </body>
 </html>
